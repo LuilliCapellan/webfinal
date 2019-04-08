@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="jdbc:h2:tcp://localhost/~/final">
+  <database-model serializer="dbm" dbms="H2" family-id="H2" format-version="4.14">
+    <root id="1">
+      <ServerVersion>1.4.196</ServerVersion>
+    </root>
+    <database id="2" parent="1" name="FINAL">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </database>
+    <schema id="3" parent="2" name="INFORMATION_SCHEMA"/>
+    <schema id="4" parent="2" name="PUBLIC">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <table id="5" parent="4" name="USUARIO"/>
+    <column id="6" parent="5" name="USUARIO_ID">
+      <Position>1</Position>
+      <DataType>BIGINT(19)|-5s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+      <DefaultExpression>(NEXT VALUE FOR PUBLIC.SYSTEM_SEQUENCE_49A7E208_FCE0_4EF0_A093_1FEC766CD72A)</DefaultExpression>
+    </column>
+    <column id="7" parent="5" name="ADMINISTRATOR">
+      <Position>2</Position>
+      <DataType>BOOLEAN|16s</DataType>
+    </column>
+    <column id="8" parent="5" name="NOMBRE">
+      <Position>3</Position>
+      <DataType>VARCHAR(255)|12s</DataType>
+    </column>
+    <column id="9" parent="5" name="PASSWORD">
+      <Position>4</Position>
+      <DataType>VARCHAR(255)|12s</DataType>
+    </column>
+    <column id="10" parent="5" name="USERNAME">
+      <Position>5</Position>
+      <DataType>VARCHAR(255)|12s</DataType>
+    </column>
+    <index id="11" parent="5" name="PRIMARY_KEY_2">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>USUARIO_ID</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="12" parent="5" name="CONSTRAINT_2">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>USUARIO_ID</ColNames>
+      <Primary>1</Primary>
+    </key>
+  </database-model>
+</dataSource>
