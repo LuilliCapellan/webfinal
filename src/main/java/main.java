@@ -1,9 +1,13 @@
+import com.google.gson.Gson;
 import encapsulacion.Usuario;
 import freemarker.template.Configuration;
 import freemarker.template.Version;
 import modelo.EntityServices.EntityServices.UsuarioService;
 import modelo.EntityServices.utils.Crypto;
 import modelo.EntityServices.utils.DBService;
+import modelo.EntityServices.utils.Rest.JsonUtilidades;
+import org.simpleframework.xml.Serializer;
+import org.simpleframework.xml.core.Persister;
 import spark.ModelAndView;
 import spark.Session;
 import spark.template.freemarker.FreeMarkerEngine;
@@ -22,16 +26,25 @@ public class main {
     static final String secretKeyUSer = "qwerty987654321";
     static final String secretKeyContra = "123456789klk";
 
+    public final static String ACCEPT_TYPE_JSON = "application/json";
+    public final static String ACCEPT_TYPE_XML = "application/xml";
+    public final static int BAD_REQUEST = 400;
+    public final static int ERROR_INTERNO = 500;
+
     public static void main(String[] args) {
 
         staticFiles.location("/template");
 
         DBService.getInstancia().iniciarDn();
+        //Entrando el admin
         Usuario usuarioStart = new Usuario("admin", "admin", "admin", true);
+
+        //Clase que representa el servicio.
         UsuarioService usuarioService = UsuarioService.getInstancia();
+
         if (usuarioService.validateLogIn("admin", "admin") == null) {
-           usuarioService.insert(usuarioStart);
-       }
+            usuarioService.insert(usuarioStart);
+        }
         Configuration configuration = new Configuration(new Version(2, 3, 0));
         configuration.setClassForTemplateLoading(main.class, "/template");
 
@@ -92,17 +105,30 @@ public class main {
                 request.session(true);
                 request.session().attribute("usuario", usuario);
                 response.redirect("/inicio/1");
-            }
-            else {
+            } else {
                 response.redirect("/");
             }
             return "";
         });
         get("/inicio/:pag", (request, response) -> {
-
             Map<String, Object> attributes = new HashMap<>();
             userLevel(attributes);
             return new ModelAndView(attributes, "inicio.ftl");
+        }, freeMarkerEngine);
+
+        get("/stats", (request, response) -> {
+
+            Map<String, Object> attributes = new HashMap<>();
+            userLevel(attributes);
+            return new ModelAndView(attributes, "stats.ftl");
+        }, freeMarkerEngine);
+
+        get("/adminPanel", (request, response) -> {
+
+
+            Map<String, Object> attributes = new HashMap<>();
+            userLevel(attributes);
+            return new ModelAndView(attributes, "stats.ftl");
         }, freeMarkerEngine);
 
         get("/agregarUsuario", (request, response) -> {
@@ -138,7 +164,84 @@ public class main {
 
             return "";
         });
+
+        //Rest
+        //rutas servicios RESTFUL
+        path("/rest", () -> {
+            //filtros especificos:
+            afterAfter("/*", (request, response) -> { //indicando que todas las llamadas retorna un json.
+                if(request.headers("Accept")!=null && request.headers("Accept").equalsIgnoreCase(ACCEPT_TYPE_XML)){
+                    response.header("Content-Type", ACCEPT_TYPE_XML);
+                }else{
+                    response.header("Content-Type", ACCEPT_TYPE_JSON);
+                }
+
+            });
+
+            get("/", (request, response) -> {
+                return "RUTA API REST";
+            });
+
+            //rutas del api
+            path("/usuarios", () -> {
+
+
+                //listar todos los usuarios.
+                get("/", (request, response) -> {
+                    return usuarioService.getAll();
+                }, JsonUtilidades.json());
+
+                //retorna un usuario
+                get("/:id", (request, response) -> {
+                    Usuario usuario = usuarioService.getById(Integer.parseInt(request.params("id")));
+                    if(usuario==null){
+                        throw new RuntimeException("No existe el cliente");
+                    }
+                    return  usuario;
+                }, JsonUtilidades.json());
+
+                //crea un usuario
+                post("/", main.ACCEPT_TYPE_JSON, (request, response) -> {
+
+                    Usuario usuario = null;
+
+                    //verificando el tipo de dato.
+                    switch (request.headers("Content-Type")) {
+                        case main.ACCEPT_TYPE_JSON:
+                            usuario = new Gson().fromJson(request.body(), Usuario.class);
+                            break;
+                        case main.ACCEPT_TYPE_XML:
+                            break;
+                        default:
+                            throw new IllegalArgumentException("Error el formato no disponible");
+                    }
+                    usuarioService.insert(usuario);
+                    return true;
+                }, JsonUtilidades.json());
+
+                //
+                post("/", main.ACCEPT_TYPE_XML, (request, response) -> {
+                    return true;
+                }, JsonUtilidades.json());
+
+                //actualiza un usuario
+                put("/", main.ACCEPT_TYPE_JSON, (request, response) -> {
+                    Usuario usuario = new Gson().fromJson(request.body(), Usuario.class);
+                    usuarioService.update(usuario);
+                    return true;
+                }, JsonUtilidades.json());
+
+                //eliminar un usuario
+                delete("/:id", (request, response) -> {
+                    Usuario usuario = new Gson().fromJson(request.body(), Usuario.class);
+                    usuarioService.delete(usuario);
+                    return true;
+                }, JsonUtilidades.json());
+
+            });
+        });
     }
+
 
 
     private static void userLevel(Map<String, Object> attributes) {
@@ -149,9 +252,4 @@ public class main {
         }
     }
 
-    static void crear() {
-        EntityManagerFactory emf =  Persistence.createEntityManagerFactory("UnidadPersistencia");
-        EntityManager entityManager = emf.createEntityManager();
-        entityManager.getTransaction().begin();
-    }
 }
