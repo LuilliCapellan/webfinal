@@ -5,9 +5,11 @@ import java.io.Serializable;
 
 @Entity
 @NamedQueries({@NamedQuery(name = "Ruta.findAllURL", query = "select r from Ruta r order by r.id desc "),
-        @NamedQuery(name = "Ruta.findURLbyUserId", query = "select r from Ruta r where r.usuario = :id"),
+        @NamedQuery(name = "Ruta.findURLbyUserId", query = "select r from Ruta r where r.usuario.id = :userid"),
         @NamedQuery(name = "Ruta.findURLbyId", query = "select r from Ruta r where r.id = :id"),
+        @NamedQuery(name = "Ruta.findNulls", query = "select r from Ruta r where r.usuario is null "),
         @NamedQuery(name = "Ruta.findURLbyRutaAcortada", query = "select r from Ruta r where r.ruta_acortada = :rutaacortada")})
+
 public class Ruta implements Serializable {
 
     @Id

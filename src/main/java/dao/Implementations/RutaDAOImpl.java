@@ -45,11 +45,11 @@ public class RutaDAOImpl extends CRUD<Ruta> implements RutaDAO {
     }
 
     @Override
-    public Ruta getByUser(long user_id) {
+    public List<Ruta> getByUser(long user_id) {
         EntityManager em = getEntityManager();
         Query query = em.createNamedQuery("Ruta.findURLbyUserId");
-        query.setParameter("id", user_id);
-        return (Ruta) query.getSingleResult();
+        query.setParameter("userid", user_id);
+        return (List<Ruta>) query.getResultList();
     }
 
     @Override
@@ -63,5 +63,46 @@ public class RutaDAOImpl extends CRUD<Ruta> implements RutaDAO {
         Query query = em.createNamedQuery("Ruta.findURLbyRutaAcortada");
         query.setParameter("ruta_acortada", rutaAcortada);
         return (Ruta) query.getSingleResult();
+    }
+
+    @Override
+    public  List<Ruta> getNulls() {
+        EntityManager em = getEntityManager();
+        Query query = em.createNamedQuery("Ruta.findNulls");
+        return (List<Ruta>) query.getResultList();
+    }
+
+    @Override
+    public List<Ruta> getPagination(int pag, long id) {
+        EntityManager em = getEntityManager();
+        Query query = em.createNamedQuery("Ruta.findURLbyUserId");
+        query.setParameter("userid", id);
+        query.setFirstResult((pag - 1) * 5);
+        query.setMaxResults(5);
+        return query.getResultList();
+    }
+
+    @Override
+    public int cantPag(long id) {
+        EntityManager em = getEntityManager();
+        Query query = em.createNamedQuery("Ruta.findURLbyUserId");
+        query.setParameter("userid", id);
+        return query.getResultList().size();
+    }
+
+    @Override
+    public int cantPagNulls() {
+        EntityManager em = getEntityManager();
+        Query query = em.createNamedQuery("Ruta.findNulls");
+        return query.getResultList().size();
+    }
+
+    @Override
+    public List<Ruta> getNullsPagination(int pag) {
+        EntityManager em = getEntityManager();
+        Query query = em.createNamedQuery("Ruta.findNulls");
+        query.setFirstResult((pag - 1) * 5);
+        query.setMaxResults(5);
+        return query.getResultList();
     }
 }

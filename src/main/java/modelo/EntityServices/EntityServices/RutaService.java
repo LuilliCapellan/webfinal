@@ -39,7 +39,7 @@ public class RutaService implements RutaDAO {
 
     @Override
     public List<Ruta> getAll() {
-        return null;
+        return rutaDAO.getAll();
     }
 
     @Override
@@ -48,7 +48,7 @@ public class RutaService implements RutaDAO {
     }
 
     @Override
-    public Ruta getByUser(long user_id) {
+    public List<Ruta> getByUser(long user_id) {
         return rutaDAO.getByUser(user_id);
     }
 
@@ -61,4 +61,30 @@ public class RutaService implements RutaDAO {
     public Ruta getByRutaAcortada(String rutaAcortada) {
         return rutaDAO.getByRutaAcortada(rutaAcortada);
     }
+
+    @Override
+    public List<Ruta> getNulls() {
+        return rutaDAO.getNulls();
+    }
+
+    @Override
+    public List<Ruta> getPagination(int pag, long id) {
+        return rutaDAO.getPagination(pag,id);
+    }
+
+    @Override
+    public int cantPag(long id) {
+        return rutaDAO.cantPag(id);
+    }
+
+    @Override
+    public int cantPagNulls() {
+        return rutaDAO.cantPagNulls();
+    }
+
+    @Override
+    public List<Ruta> getNullsPagination(int pag) {
+        return rutaDAO.getNullsPagination(pag);
+    }
+
 }

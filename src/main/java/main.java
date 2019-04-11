@@ -1,10 +1,12 @@
 import com.google.gson.Gson;
 import encapsulacion.Ruta;
 import encapsulacion.Usuario;
+import encapsulacion.Visita;
 import freemarker.template.Configuration;
 import freemarker.template.Version;
 import modelo.EntityServices.EntityServices.RutaService;
 import modelo.EntityServices.EntityServices.UsuarioService;
+import modelo.EntityServices.EntityServices.VisitaService;
 import modelo.EntityServices.utils.Crypto;
 import modelo.EntityServices.utils.DBService;
 import modelo.EntityServices.utils.Rest.JsonUtilidades;
@@ -13,6 +15,7 @@ import spark.Session;
 import spark.template.freemarker.FreeMarkerEngine;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static spark.Spark.*;
@@ -38,10 +41,13 @@ public class main {
 
         //Clase que representa el servicio.
         UsuarioService usuarioService = UsuarioService.getInstancia();
+        RutaService rutaService = RutaService.getInstancia();
+        VisitaService visitaService = VisitaService.getInstancia();
 
         if (usuarioService.validateLogIn("admin", "admin") == null) {
             usuarioService.insert(usuarioStart);
         }
+
         Configuration configuration = new Configuration(new Version(2, 3, 0));
         configuration.setClassForTemplateLoading(main.class, "/template");
 
@@ -110,21 +116,48 @@ public class main {
         get("/inicio/:pag", (request, response) -> {
             Map<String, Object> attributes = new HashMap<>();
             userLevel(attributes);
+            Ruta n;
+            if (usuario == null) {
+                attributes.put("list", rutaService.getNulls());
+                attributes.put("ruta", rutaService.getNulls());
+            } else {
+                for (Ruta r : rutaService.getNulls()
+                ) {
+                    rutaService.delete(r);
+                    n = new Ruta(r.getRuta(), r.getRuta_acortada(), usuario);
+                    rutaService.update(n);
+                }
+                attributes.put("list", rutaService.getByUser(usuario.getId()));
+                attributes.put("ruta", rutaService.getByUser(usuario.getId()));
+            }
+
             return new ModelAndView(attributes, "inicio.ftl");
         }, freeMarkerEngine);
 
-        get("/stats", (request, response) -> {
+        get("/stats/:id", (request, response) -> {
 
             Map<String, Object> attributes = new HashMap<>();
             userLevel(attributes);
             return new ModelAndView(attributes, "stats.ftl");
         }, freeMarkerEngine);
-
-        get("/adminPanel", (request, response) -> {
-
-
+        get("/links_usuario/:id", (request, response) -> {
+            String id = request.params("id");
+            long userid = Integer.parseInt(id);
             Map<String, Object> attributes = new HashMap<>();
             userLevel(attributes);
+            attributes.put("list", rutaService.getByUser(userid));
+            attributes.put("ruta", rutaService.getByUser(userid));
+            attributes.put("user", usuarioService.getById(userid));
+            return new ModelAndView(attributes, "links_usuario.ftl");
+        }, freeMarkerEngine);
+
+        get("/adminPanel", (request, response) -> {
+            Map<String, Object> attributes = new HashMap<>();
+            userLevel(attributes);
+            attributes.put("list", rutaService.getAll());
+            attributes.put("ruta", rutaService.getAll());
+            attributes.put("list2", usuarioService.getAll());
+            attributes.put("user", usuarioService.getAll());
             return new ModelAndView(attributes, "admin_panel.ftl");
         }, freeMarkerEngine);
 
@@ -159,6 +192,14 @@ public class main {
             response.redirect("/inicio/1");
             return "";
         });
+        get("/borrarlink/:id", (request, response) -> {
+            String id = request.params("id");
+            long rutaid = Integer.parseInt(id);
+            Ruta r = rutaService.getById(rutaid);
+            rutaService.delete(r);
+            response.redirect("/inicio/1");
+            return "";
+        });
 
 
         get("/logOut", (request, response) -> {
@@ -167,6 +208,18 @@ public class main {
             session.invalidate();
             response.removeCookie("/", "login");
             response.redirect("/inicio/1");
+            return "";
+        });
+
+        get("/userlevel/:id", (request, response) -> {
+            String id = request.params("id");
+            long userid = Integer.parseInt(id);
+            Usuario u = usuarioService.getById(userid);
+            usuarioService.delete(u);
+            Boolean level = !u.getAdministrator();
+            Usuario nu = new Usuario(u.getUsername(),u.getNombre(),u.getPassword(),level);
+            usuarioService.update(nu);
+            response.redirect("/adminPanel");
             return "";
         });
 
@@ -240,6 +293,117 @@ public class main {
                 delete("/:id", (request, response) -> {
                     Usuario usuario = new Gson().fromJson(request.body(), Usuario.class);
                     usuarioService.delete(usuario);
+                    return true;
+                }, JsonUtilidades.json());
+
+            });
+            path("/rutas", () -> {
+
+
+                //listar todos las rutas.
+                get("/", (request, response) -> {
+                    return rutaService.getAll();
+                }, JsonUtilidades.json());
+
+                //retorna una ruta
+                get("/:id", (request, response) -> {
+                    Ruta ruta = rutaService.getById(Integer.parseInt(request.params("id")));
+                    if (ruta == null) {
+                        throw new RuntimeException("No existe el cliente");
+                    }
+                    return ruta;
+                }, JsonUtilidades.json());
+
+                //crea una ruta
+                post("/", main.ACCEPT_TYPE_JSON, (request, response) -> {
+
+                    Ruta ruta = null;
+
+                    //verificando el tipo de dato.
+                    switch (request.headers("Content-Type")) {
+                        case main.ACCEPT_TYPE_JSON:
+                            ruta = new Gson().fromJson(request.body(), Ruta.class);
+                            break;
+                        case main.ACCEPT_TYPE_XML:
+                            break;
+                        default:
+                            throw new IllegalArgumentException("Error el formato no disponible");
+                    }
+                    rutaService.insert(ruta);
+                    return true;
+                }, JsonUtilidades.json());
+
+                //
+                post("/", main.ACCEPT_TYPE_XML, (request, response) -> {
+                    return true;
+                }, JsonUtilidades.json());
+
+                //actualiza una ruta
+                put("/", main.ACCEPT_TYPE_JSON, (request, response) -> {
+                    Ruta ruta = new Gson().fromJson(request.body(), Ruta.class);
+                    rutaService.update(ruta);
+                    return true;
+                }, JsonUtilidades.json());
+
+                //eliminar una ruta
+                delete("/:id", (request, response) -> {
+                    Ruta ruta = new Gson().fromJson(request.body(), Ruta.class);
+                    rutaService.delete(ruta);
+                    return true;
+                }, JsonUtilidades.json());
+
+            });
+            path("/visitas", () -> {
+
+                //listar todos las rutas.
+                get("/", (request, response) -> {
+                    return visitaService.getAll();
+                }, JsonUtilidades.json());
+
+                //retorna una ruta
+                get("/:id", (request, response) -> {
+                    Visita visita = visitaService.getById(Integer.parseInt(request.params("id")));
+                    if (visita == null) {
+                        throw new RuntimeException("No existe el cliente");
+                    }
+                    return visita;
+                }, JsonUtilidades.json());
+
+                //crea una ruta
+                post("/", main.ACCEPT_TYPE_JSON, (request, response) -> {
+
+                    Visita visita = null;
+
+                    //verificando el tipo de dato.
+                    switch (request.headers("Content-Type")) {
+                        case main.ACCEPT_TYPE_JSON:
+                            visita = new Gson().fromJson(request.body(), Visita.class);
+                            break;
+                        case main.ACCEPT_TYPE_XML:
+                            break;
+                        default:
+                            throw new IllegalArgumentException("Error el formato no disponible");
+                    }
+                    visitaService.insert(visita);
+                    return true;
+                }, JsonUtilidades.json());
+
+                //
+                post("/", main.ACCEPT_TYPE_XML, (request, response) -> {
+                    return true;
+                }, JsonUtilidades.json());
+
+                //actualiza una ruta
+                put("/", main.ACCEPT_TYPE_JSON, (request, response) -> {
+                    Visita visita = new Gson().fromJson(request.body(), Visita.class);
+                    visitaService.update(visita);
+                    return true;
+                }, JsonUtilidades.json());
+
+                //eliminar una ruta
+                delete("/:id", (request, response) -> {
+                    Visita visita = new Gson().fromJson(request.body(), Visita.class);
+                    visitaService.delete(visita);
                     return true;
                 }, JsonUtilidades.json());
 

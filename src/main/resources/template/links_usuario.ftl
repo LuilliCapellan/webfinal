@@ -68,15 +68,7 @@
         })
     </script>
 
-
-    <div class="input-group mb-3" style="margin-top: 2vh">
-        <input type="text" class="form-control" placeholder="Intruduzca URL..." aria-label="Intruduzca URL..."
-               aria-describedby="button-add-url">
-        <div class="input-group-append">
-            <button class="btn btn-outline-secondary" type="button" id="button-addon2">Agregar</button>
-        </div>
-    </div>
-    <h4 class="card-title">Links agregados</h4>
+    <h4 class="card-title">Links de ${user.nombre} </h4>
     <div class="row">
 
         <!-- Blog Entries Column -->
@@ -85,135 +77,34 @@
                 <table class="table table-borderless">
                     <thead>
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col" style="margin-right: 25vh;" >Bookmark</th>
+                        <th scope="col" style="margin-right: 25vh;">Bookmark</th>
                         <th scope="col">Acortado</th>
-                        <th scope="col">Completo</th>
                         <th scope="col">Estadisticas</th>
+                        <th >Accion</th>
 
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td class="col">
-                            <a class="link-preview"
-                               href="https://developers.google.com/chart/interactive/docs/basic_load_libs"></a></td>
-                        <td><a href="#" class="badge badge-dark">lcapellan.me/8d5</a></td>
-                        <td><a href="#" class="badge badge-dark">prueba.com/prueba_larga/paratest/546548aasd</a></td>
-                        <td>
-                            <a href="/stats" class="btn btn-primary">
-                                Estadisticas
-                            </a></td>
-
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>
-                            <a class="link-preview" href="https://www.reddit.com/">https://www.reddit.com/</a></td>
-                        <td><a href="#" class="badge badge-dark">lcapellan.me/8d5</a></td>
-                        <td><a href="#" class="badge badge-dark">prueba.com/prueba_larga/paratest/546548aasd</a></td>
-                        <td>
-                            <a href="/stats" class="btn btn-primary">
-                                Estadisticas
-                            </a></td>
-
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>
-                            <a class="link-preview" href="https://www.reddit.com/">https://www.reddit.com/</a></td>
-                        <td><a href="#" class="badge badge-dark">lcapellan.me/8d5</a></td>
-                        <td><a href="#" class="badge badge-dark">prueba.com/prueba_larga/paratest/546548aasd</a></td>
-                        <td>
-                            <a href="/stats" class="btn btn-primary ">
-                                Estadisticas
-                            </a></td>
-                    </tr>
+                    <#list list as ruta>
+                        <tr>
+                            <td class="col">
+                                <a class="link-preview"
+                                   href="${ruta.ruta}"></a></td>
+                            <td><a href="#" class="badge badge-dark">${ruta.ruta_acortada}</a></td>
+                            <td>
+                                <a href="/stats/${ruta.id}" class="btn btn-primary">
+                                    Estadisticas
+                                </a></td>
+                            <td>
+                                <a href="/borrarlink/${ruta.id}" class="btn btn-danger">
+                                    Borrar
+                                </a>
+                            </td>
+                        </tr>
+                    </#list>
                     </tbody>
                 </table>
-
-
 </body>
-</div>
-
-
-<#--<h1 class="my-4">${titulo}</h1>-->
-
-
-<#--<#list list as articulo>-->
-<#--<!-- Blog Post &ndash;&gt;-->
-<#--<div class="card mb-4">-->
-<#--<div class="card-body">-->
-<#--<h2 class="card-title">${articulo.titulo}</h2>-->
-<#--<p class="card-text">${articulo.cuerpo}</p>-->
-<#--<a href="/verMas/${articulo.id}" style="float: right" class="btn btn-primary">Leer más-->
-<#--&rarr;</a>-->
-<#--</div>-->
-<#--<div>-->
-<#--<#assign x = articulo.id>-->
-<#--<#list etiquetas as etiqueta>-->
-<#--<#assign y = etiqueta.articulo.id>-->
-<#--<#if (x == y?number) && etiqueta.articulo?? >-->
-<#--<a href="/articulos/${etiqueta.etiqueta}"-->
-<#--class="badge badge-primary">${etiqueta.etiqueta}</a>-->
-<#--</#if>-->
-
-<#--</#list>-->
-<#--</div>-->
-<#--<div class="card-footer text-muted">-->
-<#--Publicado el ${articulo.fecha} por-->
-<#--<a href="/ver/${articulo.autor.id}">${articulo.autor.nombre}</a>-->
-<#--<a style="float: right" href="#" class="btn btn-primary btn-primary"><span-->
-<#--class="far fa-thumbs-up"></span> Like</a>-->
-<#--</div>-->
-<#--</div>-->
-<#--</#list>-->
-
-<#--<!-- Pagination &ndash;&gt;-->
-<#--<ul class="pagination justify-content-center mb-4">-->
-<#--<#if actual gt 1>-->
-<#--<li class="page-item">-->
-<#--<a class="page-link" href="/inicio/${actual - 1}">&larr; Atras</a>-->
-<#--</li>-->
-
-<#--<#else>-->
-<#--<li class="page-item disabled">-->
-<#--<a class="page-link" href="#">Atras &larr;</a>-->
-<#--</li>-->
-
-<#--</#if>-->
-
-<#--<#if paginas gt actual>-->
-<#--<li class="page-item">-->
-<#--<a class="page-link" href="/inicio/${actual + 1}">&rarr; Siguiente</a>-->
-<#--</li>-->
-<#--<#else>-->
-<#--<li class="page-item disabled">-->
-<#--<a class="page-link" href="#">Siguiente &rarr;</a>-->
-<#--</li>-->
-<#--</#if>-->
-<#--</ul>-->
-</div>
-
-<!-- Sidebar Widgets Column -->
-<div class="col-md-4">
-    <#--<!-- Side Widget &ndash;&gt;-->
-    <#--<div class="card my-4">-->
-    <#--<h5 class="card-header">Blog</h5>-->
-    <#--<div class="card-body">-->
-    <#--Blog de prueba para la materia de Programacion WEB dada por el profesor Carlos Camacho, tarea-->
-    <#--presentada por el estudiante, Luis Capellan-->
-    <#--Matricula 2014-0984-->
-    <#--</div>-->
-    <#--</div>-->
-</div>
-
-</div>
-<!-- /.row -->
-
-</div>
-<!-- /.container -->
 
 <!-- Footer -->
 <footer class="py-5 bg-dark">
@@ -223,7 +114,6 @@
     <!-- /.container -->
 </footer>
 <!-- /.container -->
-</footer>
 
 <!-- Bootstrap core JavaScript -->
 <script src="../vendor/jquery/jquery.min.js"></script>
@@ -231,7 +121,4 @@
 <script src="../vendor/bootstrap/js/jquery.min.js"></script>
 <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
 <script src="../vendor/bootstrap/js/my-login.js"></script>
-
-</body>
-
 </html>

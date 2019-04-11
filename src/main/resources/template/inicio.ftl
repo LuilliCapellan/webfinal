@@ -89,51 +89,36 @@
                 <table class="table table-borderless">
                     <thead>
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col" style="margin-right: 25vh;">Bookmark</th>
-                        <th scope="col">Acortado</th>
-                        <th scope="col">Completo</th>
-                        <th scope="col">Estadisticas</th>
+                        <th>Bookmark</th>
+                        <th>Acortado</th>
+                        <#if usuario??>
+                            <th>Estadisticas</th>
+                        </#if>
+                        <th>Accion</th>
 
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td class="col">
-                            <a class="link-preview"
-                               href="https://developers.google.com/chart/interactive/docs/basic_load_libs"></a></td>
-                        <td><a href="#" class="badge badge-dark">lcapellan.me/8d5</a></td>
-                        <td><a href="#" class="badge badge-dark">prueba.com/prueba_larga/paratest/546548aasd</a></td>
-                        <td>
-                            <a href="/stats" class="btn btn-primary">
-                                Estadisticas
-                            </a></td>
-
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>
-                            <a class="link-preview" href="https://www.reddit.com/">https://www.reddit.com/</a></td>
-                        <td><a href="#" class="badge badge-dark">lcapellan.me/8d5</a></td>
-                        <td><a href="#" class="badge badge-dark">prueba.com/prueba_larga/paratest/546548aasd</a></td>
-                        <td>
-                            <a href="/stats" class="btn btn-primary">
-                                Estadisticas
-                            </a></td>
-
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>
-                            <a class="link-preview" href="https://www.reddit.com/">https://www.reddit.com/</a></td>
-                        <td><a href="#" class="badge badge-dark">lcapellan.me/8d5</a></td>
-                        <td><a href="#" class="badge badge-dark">prueba.com/prueba_larga/paratest/546548aasd</a></td>
-                        <td>
-                            <a href="/stats" class="btn btn-primary ">
-                                Estadisticas
-                            </a></td>
-                    </tr>
+                    <#list list as ruta>
+                        <tr>
+                            <td class="col">
+                                <a class="link-preview"
+                                   href="${ruta.ruta}"></a></td>
+                            <td><a href="#" class="badge badge-dark">${ruta.ruta_acortada}</a></td>
+                            <#if usuario??>
+                                <td>
+                                    <a href="/stats/${ruta.id}" class="btn btn-primary">
+                                        Estadisticas
+                                    </a>
+                                </td>
+                            </#if>
+                            <td>
+                                <a href="/borrarlink/${ruta.id}" class="btn btn-danger">
+                                    Borrar
+                                </a>
+                            </td>
+                        </tr>
+                    </#list>
                     </tbody>
                 </table>
             </div>

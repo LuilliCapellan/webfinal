@@ -16,9 +16,21 @@ public interface RutaDAO {
 
     Ruta getById(long id);
 
-    Ruta getByUser(long user_id);
+    List<Ruta> getByUser(long user_id);
 
     Ruta generateShortLink(String ruta);
 
     Ruta getByRutaAcortada(String rutaAcortada);
+
+    List<Ruta> getNulls();
+
+    List<Ruta> getPagination(int pag, long id);
+
+    int cantPag(long id);
+
+    int cantPagNulls();
+
+    List<Ruta>getNullsPagination(int pag);
+
+
 }
