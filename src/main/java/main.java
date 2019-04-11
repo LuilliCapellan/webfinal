@@ -1,20 +1,17 @@
 import com.google.gson.Gson;
+import encapsulacion.Ruta;
 import encapsulacion.Usuario;
 import freemarker.template.Configuration;
 import freemarker.template.Version;
+import modelo.EntityServices.EntityServices.RutaService;
 import modelo.EntityServices.EntityServices.UsuarioService;
 import modelo.EntityServices.utils.Crypto;
 import modelo.EntityServices.utils.DBService;
 import modelo.EntityServices.utils.Rest.JsonUtilidades;
-import org.simpleframework.xml.Serializer;
-import org.simpleframework.xml.core.Persister;
 import spark.ModelAndView;
 import spark.Session;
 import spark.template.freemarker.FreeMarkerEngine;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -128,7 +125,7 @@ public class main {
 
             Map<String, Object> attributes = new HashMap<>();
             userLevel(attributes);
-            return new ModelAndView(attributes, "stats.ftl");
+            return new ModelAndView(attributes, "admin_panel.ftl");
         }, freeMarkerEngine);
 
         get("/agregarUsuario", (request, response) -> {
@@ -154,14 +151,22 @@ public class main {
             return "";
         });
 
-        get("/logOut", (request, response) -> {
+        post("/agregarlink", (request, response) -> {
+            String link = request.queryParams("link");
+            Ruta r = new Ruta(link, "lcapellan.me/test", usuario);
+            System.out.println(r);
+            RutaService.getInstancia().insert(r);
+            response.redirect("/inicio/1");
+            return "";
+        });
 
+
+        get("/logOut", (request, response) -> {
             usuario = null;
             Session session = request.session(true);
             session.invalidate();
             response.removeCookie("/", "login");
             response.redirect("/inicio/1");
-
             return "";
         });
 
@@ -170,9 +175,9 @@ public class main {
         path("/rest", () -> {
             //filtros especificos:
             afterAfter("/*", (request, response) -> { //indicando que todas las llamadas retorna un json.
-                if(request.headers("Accept")!=null && request.headers("Accept").equalsIgnoreCase(ACCEPT_TYPE_XML)){
+                if (request.headers("Accept") != null && request.headers("Accept").equalsIgnoreCase(ACCEPT_TYPE_XML)) {
                     response.header("Content-Type", ACCEPT_TYPE_XML);
-                }else{
+                } else {
                     response.header("Content-Type", ACCEPT_TYPE_JSON);
                 }
 
@@ -194,10 +199,10 @@ public class main {
                 //retorna un usuario
                 get("/:id", (request, response) -> {
                     Usuario usuario = usuarioService.getById(Integer.parseInt(request.params("id")));
-                    if(usuario==null){
+                    if (usuario == null) {
                         throw new RuntimeException("No existe el cliente");
                     }
-                    return  usuario;
+                    return usuario;
                 }, JsonUtilidades.json());
 
                 //crea un usuario
@@ -241,7 +246,6 @@ public class main {
             });
         });
     }
-
 
 
     private static void userLevel(Map<String, Object> attributes) {

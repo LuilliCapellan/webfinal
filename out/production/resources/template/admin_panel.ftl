@@ -48,61 +48,203 @@
 
 <!-- Page Content -->
 <div class="container">
+    <!-- Microlink SDK Vanilla/UMD bundle -->
+    <script src="//cdn.jsdelivr.net/npm/@microlink/vanilla@latest/umd/microlink.min.js"></script>
 
+    <!-- Replace all elements with `link-preview` class -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function (event) {
+            microlink('.link-preview', {
+                size: 'small',
+                video: true
+            })
+        })
+    </script>
     <div class="row">
+        <div class="accordion" id="accordionExample">
+            <div class="card">
+                <div class="card-header" id="headingOne">
+                    <h2 class="mb-0">
+                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
+                                aria-expanded="true" aria-controls="collapseOne">
+                            Todos los usuarios
+                        </button>
+                    </h2>
+                </div>
 
-        <!-- Blog Entries Column -->
-        <div class="col-md-8">
-            <table class="table table-borderless">
-                <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Bookmark</th>
-                    <th scope="col">Acortado</th>
-                    <th scope="col">Completo</th>
-                    <th scope="col">Estadisticas</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td colspan="2">Larry the Bird</td>
-                    <td>@twitter</td>
-                </tr>
-                </tbody>
-            </table>
+                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                     data-parent="#accordionExample">
+                    <div class="row">
+                        <!-- Usuarios -->
+                        <div class="col-md-12">
+                            <div>
+                                <table class="table table-borderless table-responsive" style="width: 1080px">
+                                    <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Usuario</th>
+                                        <th class="col-sm-3">Nombre</th>
+                                        <th>Links</th>
+                                        <th class="col-sm-2">Nivel de acceso</th>
 
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>
+                                            lugi
+                                        </td>
+                                        <td>
+                                            Luis Capellan
+                                        </td>
+                                        <td>
+                                            <a href="#" class="badge badge-dark">22</a>
+                                        </td>
+                                        <td>
+                                            <a href="/stats" class="btn btn-primary">
+                                                usuario
+                                            </a>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">2</th>
+                                        <td>
+                                            lugi
+                                        </td>
+                                        <td>
+                                            Luis Capellan
+                                        </td>
+                                        <td>
+                                            <a href="#" class="badge badge-dark">22</a>
+                                        </td>
+                                        <td>
+                                            <a href="/stats" class="btn btn-primary">
+                                                usuario
+                                            </a>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">3</th>
+                                        <td>
+                                            lugi
+                                        </td>
+                                        <td>
+                                            Luis Capellan
+                                        </td>
+                                        <td>
+                                            <a href="#" class="badge badge-dark">22</a>
+                                        </td>
+                                        <td>
+                                            <a href="/stats" class="btn btn-primary">
+                                                usuario
+                                            </a>
+                                        </td>
+
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" id="headingTwo">
+                    <h2 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            Todos los links
+                        </button>
+                    </h2>
+                </div>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+                     data-parent="#accordionExample">
+                    <div class="row">
+
+                        <!-- Blog Entries Column -->
+                        <div class="col-md-12">
+                            <div class="table-responsive-md">
+                                <table class="table table-borderless" style="width: 1080px">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col" style="margin-right: 25vh;">Bookmark</th>
+                                        <th scope="col">Acortado</th>
+                                        <th scope="col">Completo</th>
+                                        <th scope="col">Estadisticas</th>
+                                        <th scope="col">Accion</th>
+
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>
+                                            <a class="link-preview"
+                                               href="https://developers.google.com/chart/interactive/docs/basic_load_libs"></a>
+                                        </td>
+                                        <td><a href="#" class="badge badge-dark">lcapellan.me/8d5</a></td>
+                                        <td><a href="#" class="badge badge-dark">prueba.com/prueba_larga/paratest/546548aasd</a>
+                                        </td>
+                                        <td>
+                                            <a href="/stats" class="btn btn-primary">
+                                                Estadisticas
+                                            </a></td>
+                                        <td>
+                                            <a href="/stats" class="btn btn-danger">
+                                                Borrar
+                                            </a></td>
+
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">2</th>
+                                        <td>
+                                            <a class="link-preview" href="https://www.reddit.com/">https://www.reddit.com/</a>
+                                        </td>
+                                        <td><a href="#" class="badge badge-dark">lcapellan.me/8d5</a></td>
+                                        <td><a href="#" class="badge badge-dark">prueba.com/prueba_larga/paratest/546548aasd</a>
+                                        </td>
+                                        <td>
+                                            <a href="/stats" class="btn btn-primary">
+                                                Estadisticas
+                                            </a></td>
+                                        <td>
+                                            <a href="/stats" class="btn btn-danger">
+                                                Borrar
+                                            </a></td>
+
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">3</th>
+                                        <td>
+                                            <a class="link-preview" href="https://www.reddit.com/">https://www.reddit.com/</a>
+                                        </td>
+                                        <td><a href="#" class="badge badge-dark">lcapellan.me/8d5</a></td>
+                                        <td><a href="#" class="badge badge-dark">prueba.com/prueba_larga/paratest/546548aasd</a>
+                                        </td>
+                                        <td>
+                                            <a href="/stats" class="btn btn-primary ">
+                                                Estadisticas
+                                            </a></td>
+                                        <td>
+                                            <a href="/stats" class="btn btn-danger">
+                                                Borrar
+                                            </a></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </div>
-
-        <!-- Sidebar Widgets Column -->
-        <div class="col-md-4">
-            <#--<!-- Side Widget &ndash;&gt;-->
-            <#--<div class="card my-4">-->
-            <#--<h5 class="card-header">Blog</h5>-->
-            <#--<div class="card-body">-->
-            <#--Blog de prueba para la materia de Programacion WEB dada por el profesor Carlos Camacho, tarea-->
-            <#--presentada por el estudiante, Luis Capellan-->
-            <#--Matricula 2014-0984-->
-            <#--</div>-->
-            <#--</div>-->
-        </div>
-
+        <!-- /.row -->
     </div>
-    <!-- /.row -->
-
 </div>
 <!-- /.container -->
 

@@ -69,13 +69,17 @@
     </script>
 
 
-    <div class="input-group mb-3" style="margin-top: 2vh">
-        <input type="text" class="form-control" placeholder="Intruduzca URL..." aria-label="Intruduzca URL..."
-               aria-describedby="button-add-url">
-        <div class="input-group-append">
-            <button class="btn btn-outline-secondary" type="button" id="button-addon2">Agregar</button>
+    <form method="post" action="/agregarlink">
+        <div class="input-group mb-3" style="margin-top: 2vh">
+            <input type="text" class="form-control" placeholder="Intruduzca URL..." aria-label="Intruduzca URL..."
+                   aria-describedby="button-add-url" name="link" required>
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Agregar
+                </button>
+            </div>
         </div>
-    </div>
+    </form>
+
     <h4 class="card-title">Links agregados</h4>
     <div class="row">
 
@@ -86,7 +90,7 @@
                     <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col" style="margin-right: 25vh;" >Bookmark</th>
+                        <th scope="col" style="margin-right: 25vh;">Bookmark</th>
                         <th scope="col">Acortado</th>
                         <th scope="col">Completo</th>
                         <th scope="col">Estadisticas</th>
@@ -132,10 +136,10 @@
                     </tr>
                     </tbody>
                 </table>
-
+            </div>
+        </div>
 
 </body>
-</div>
 
 
 <#--<h1 class="my-4">${titulo}</h1>-->
@@ -194,7 +198,6 @@
 <#--</li>-->
 <#--</#if>-->
 <#--</ul>-->
-</div>
 
 <!-- Sidebar Widgets Column -->
 <div class="col-md-4">
@@ -209,21 +212,18 @@
     <#--</div>-->
 </div>
 
-</div>
 <!-- /.row -->
 
-</div>
 <!-- /.container -->
 
 <!-- Footer -->
-<footer class="py-5 bg-dark">
+<footer class="py-5 bg-dark embed-responsive">
     <div class="container">
         <p class="m-0 text-center text-white">Luis Capellan - 2014-0984</p>
     </div>
     <!-- /.container -->
 </footer>
 <!-- /.container -->
-</footer>
 
 <!-- Bootstrap core JavaScript -->
 <script src="../vendor/jquery/jquery.min.js"></script>
@@ -232,6 +232,5 @@
 <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
 <script src="../vendor/bootstrap/js/my-login.js"></script>
 
-</body>
 
 </html>
