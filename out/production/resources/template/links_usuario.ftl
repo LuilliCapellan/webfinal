@@ -12,10 +12,10 @@
     <title>Acortador URL - Final Web1 - 2014-0984</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="../css/blog-home.css" rel="stylesheet">
+    <link href="../../css/blog-home.css" rel="stylesheet">
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/@microlink/vanilla@latest/umd/microlink.min.js"></script>
 
 
@@ -80,8 +80,7 @@
                         <th scope="col" style="margin-right: 25vh;">Bookmark</th>
                         <th scope="col">Acortado</th>
                         <th scope="col">Estadisticas</th>
-                        <th >Accion</th>
-
+                        <th>Accion</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -96,7 +95,7 @@
                                     Estadisticas
                                 </a></td>
                             <td>
-                                <a href="/borrarlink/${ruta.id}" class="btn btn-danger">
+                                <a href="/borrarlink2/${ruta.id}/${ruta.usuario.id}" class="btn btn-danger">
                                     Borrar
                                 </a>
                             </td>
@@ -104,10 +103,37 @@
                     </#list>
                     </tbody>
                 </table>
+            </div>
+            <ul class="pagination justify-content-center mb-4">
+                <#if actual gt 1>
+                    <li class="page-item">
+                        <a class="page-link" href="/links/${user.id}/${actual - 1}">&larr; Atras</a>
+                    </li>
+
+                <#else>
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#">Atras &larr;</a>
+                    </li>
+
+                </#if>
+
+                <#if paginas gt actual>
+                    <li class="page-item">
+                        <a class="page-link" href="/links/${user.id}/${actual + 1}">&rarr; Siguiente</a>
+                    </li>
+                <#else>
+
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#">Siguiente &rarr;</a>
+                    </li>
+
+                </#if>
+            </ul>
+        </div>
 </body>
 
 <!-- Footer -->
-<footer class="py-5 bg-dark">
+<footer class="py-5 bg-dark embed-responsive">
     <div class="container">
         <p class="m-0 text-center text-white">Luis Capellan - 2014-0984</p>
     </div>
@@ -116,9 +142,9 @@
 <!-- /.container -->
 
 <!-- Bootstrap core JavaScript -->
-<script src="../vendor/jquery/jquery.min.js"></script>
-<script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="../vendor/bootstrap/js/jquery.min.js"></script>
-<script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
-<script src="../vendor/bootstrap/js/my-login.js"></script>
+<script src="../../vendor/jquery/jquery.min.js"></script>
+<script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="../../vendor/bootstrap/js/jquery.min.js"></script>
+<script src="../../vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="../../vendor/bootstrap/js/my-login.js"></script>
 </html>

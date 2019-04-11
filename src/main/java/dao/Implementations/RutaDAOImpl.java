@@ -105,4 +105,13 @@ public class RutaDAOImpl extends CRUD<Ruta> implements RutaDAO {
         query.setMaxResults(5);
         return query.getResultList();
     }
+
+    @Override
+    public List<Ruta> getPagAll(int pag) {
+        EntityManager em = getEntityManager();
+        Query query = em.createNamedQuery("Ruta.findAllURL");
+        query.setFirstResult((pag - 1) * 5);
+        query.setMaxResults(5);
+        return query.getResultList();
+    }
 }

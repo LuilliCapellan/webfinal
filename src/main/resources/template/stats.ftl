@@ -58,6 +58,14 @@
 <!-- Page Content -->
 <div class="container">
 
+    <script>
+        $(function () {
+            $("#generate").click(function () {
+                // $(".qr-code").attr("src", "https://chart.googleapis.com/chart?cht=qr&chl=" + htmlEncode($("#content").val()) + "&chs=160x160&chld=L|0");
+                $(".qr-code").attr("src", "https://chart.googleapis.com/chart?cht=qr&chl=" + ${link.ruta} +"&chs=160x160&chld=L|0");
+            });
+        });
+    </script>
     <div class="row">
 
         <!-- Post Content Column -->
@@ -98,8 +106,11 @@
             <!-- Side Widget -->
             <div class="card my-4">
                 <h5 class="card-header">Codigo QR</h5>
-                <div class="card-body">
-                    Aqui va el codigo QR
+                <div class="container-fluid">
+                    <div class="text-center">
+                        <img src="https://chart.googleapis.com/chart?cht=qr&chl=${link.ruta}&chs=160x160&chld=L|0"
+                             class="qr-code img-thumbnail img-responsive">
+                    </div>
                 </div>
             </div>
 

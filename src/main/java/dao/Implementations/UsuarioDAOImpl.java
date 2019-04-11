@@ -68,5 +68,14 @@ public class UsuarioDAOImpl extends CRUD<Usuario> implements UsuarioDAO {
 
     }
 
+    @Override
+    public List<Usuario> getPagination(int pag) {
+        EntityManager em = getEntityManager();
+        Query query = em.createNamedQuery("Usuario.findAllUsuario");
+        query.setFirstResult((pag - 1) * 5);
+        query.setMaxResults(5);
+        return query.getResultList();
+    }
+
 
 }

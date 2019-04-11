@@ -36,7 +36,7 @@
             <ul class="navbar-nav ml-auto">
                 <#if admin?? && admin == true>
                     <li class="nav-item">
-                        <a class="nav-link" href="/adminPanel">Panel de Admin</a>
+                        <a class="nav-link" href="/adminPanel/1/1">Panel de Admin</a>
                     </li>
                 </#if>
                 <#if usuario??>
@@ -113,7 +113,7 @@
                                 </td>
                             </#if>
                             <td>
-                                <a href="/borrarlink/${ruta.id}" class="btn btn-danger">
+                                <a href="/borrarlink/${ruta.id}/1" class="btn btn-danger">
                                     Borrar
                                 </a>
                             </td>
@@ -122,80 +122,35 @@
                     </tbody>
                 </table>
             </div>
+            <ul class="pagination justify-content-center mb-4">
+                <#if actual gt 1>
+                    <li class="page-item">
+                        <a class="page-link" href="/inicio/${actual - 1}">&larr; Atras</a>
+                    </li>
+
+                <#else>
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#">Atras &larr;</a>
+                    </li>
+
+                </#if>
+
+                <#if paginas gt actual>
+                    <li class="page-item">
+                        <a class="page-link" href="/inicio/${actual + 1}">&rarr; Siguiente</a>
+                    </li>
+                <#else>
+
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#">Siguiente &rarr;</a>
+                    </li>
+
+                </#if>
+            </ul>
         </div>
 
 </body>
 
-
-<#--<h1 class="my-4">${titulo}</h1>-->
-
-
-<#--<#list list as articulo>-->
-<#--<!-- Blog Post &ndash;&gt;-->
-<#--<div class="card mb-4">-->
-<#--<div class="card-body">-->
-<#--<h2 class="card-title">${articulo.titulo}</h2>-->
-<#--<p class="card-text">${articulo.cuerpo}</p>-->
-<#--<a href="/verMas/${articulo.id}" style="float: right" class="btn btn-primary">Leer más-->
-<#--&rarr;</a>-->
-<#--</div>-->
-<#--<div>-->
-<#--<#assign x = articulo.id>-->
-<#--<#list etiquetas as etiqueta>-->
-<#--<#assign y = etiqueta.articulo.id>-->
-<#--<#if (x == y?number) && etiqueta.articulo?? >-->
-<#--<a href="/articulos/${etiqueta.etiqueta}"-->
-<#--class="badge badge-primary">${etiqueta.etiqueta}</a>-->
-<#--</#if>-->
-
-<#--</#list>-->
-<#--</div>-->
-<#--<div class="card-footer text-muted">-->
-<#--Publicado el ${articulo.fecha} por-->
-<#--<a href="/ver/${articulo.autor.id}">${articulo.autor.nombre}</a>-->
-<#--<a style="float: right" href="#" class="btn btn-primary btn-primary"><span-->
-<#--class="far fa-thumbs-up"></span> Like</a>-->
-<#--</div>-->
-<#--</div>-->
-<#--</#list>-->
-
-<#--<!-- Pagination &ndash;&gt;-->
-<#--<ul class="pagination justify-content-center mb-4">-->
-<#--<#if actual gt 1>-->
-<#--<li class="page-item">-->
-<#--<a class="page-link" href="/inicio/${actual - 1}">&larr; Atras</a>-->
-<#--</li>-->
-
-<#--<#else>-->
-<#--<li class="page-item disabled">-->
-<#--<a class="page-link" href="#">Atras &larr;</a>-->
-<#--</li>-->
-
-<#--</#if>-->
-
-<#--<#if paginas gt actual>-->
-<#--<li class="page-item">-->
-<#--<a class="page-link" href="/inicio/${actual + 1}">&rarr; Siguiente</a>-->
-<#--</li>-->
-<#--<#else>-->
-<#--<li class="page-item disabled">-->
-<#--<a class="page-link" href="#">Siguiente &rarr;</a>-->
-<#--</li>-->
-<#--</#if>-->
-<#--</ul>-->
-
-<!-- Sidebar Widgets Column -->
-<div class="col-md-4">
-    <#--<!-- Side Widget &ndash;&gt;-->
-    <#--<div class="card my-4">-->
-    <#--<h5 class="card-header">Blog</h5>-->
-    <#--<div class="card-body">-->
-    <#--Blog de prueba para la materia de Programacion WEB dada por el profesor Carlos Camacho, tarea-->
-    <#--presentada por el estudiante, Luis Capellan-->
-    <#--Matricula 2014-0984-->
-    <#--</div>-->
-    <#--</div>-->
-</div>
 
 <!-- /.row -->
 

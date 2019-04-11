@@ -1,5 +1,6 @@
 package dao.interfaces;
 
+import encapsulacion.Ruta;
 import encapsulacion.Usuario;
 
 import java.util.List;
@@ -17,4 +18,5 @@ public interface UsuarioDAO {
     Usuario getById(long id);
 
     Usuario validateLogIn(String user, String pass);
+    List<Usuario> getPagination(int pag);
 }

@@ -87,4 +87,9 @@ public class RutaService implements RutaDAO {
         return rutaDAO.getNullsPagination(pag);
     }
 
+    @Override
+    public List<Ruta> getPagAll(int pag) {
+        return rutaDAO.getPagAll(pag);
+    }
+
 }

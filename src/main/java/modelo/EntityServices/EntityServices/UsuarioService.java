@@ -52,4 +52,9 @@ public class UsuarioService implements UsuarioDAO {
         return usuarioDAO.validateLogIn(user, pass);
     }
 
+    @Override
+    public List<Usuario> getPagination(int pag) {
+        return usuarioDAO.getPagination(pag);
+    }
+
 }

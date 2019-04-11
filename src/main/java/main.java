@@ -9,13 +9,13 @@ import modelo.EntityServices.EntityServices.UsuarioService;
 import modelo.EntityServices.EntityServices.VisitaService;
 import modelo.EntityServices.utils.Crypto;
 import modelo.EntityServices.utils.DBService;
+import modelo.EntityServices.utils.Filtros;
 import modelo.EntityServices.utils.Rest.JsonUtilidades;
 import spark.ModelAndView;
 import spark.Session;
 import spark.template.freemarker.FreeMarkerEngine;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import static spark.Spark.*;
@@ -107,7 +107,7 @@ public class main {
                 usuario = usuario1;
                 request.session(true);
                 request.session().attribute("usuario", usuario);
-                response.redirect("/inicio/1");
+                response.redirect("/inicio");
             } else {
                 response.redirect("/");
             }
@@ -116,9 +116,13 @@ public class main {
         get("/inicio/:pag", (request, response) -> {
             Map<String, Object> attributes = new HashMap<>();
             userLevel(attributes);
+            String p = request.params("pag");
+            int pagina = Integer.parseInt(p);
             Ruta n;
             if (usuario == null) {
-                attributes.put("list", rutaService.getNulls());
+                attributes.put("list", rutaService.getNullsPagination(pagina));
+                attributes.put("actual", pagina);
+                attributes.put("paginas", Math.ceil(rutaService.cantPagNulls() / 5f));
                 attributes.put("ruta", rutaService.getNulls());
             } else {
                 for (Ruta r : rutaService.getNulls()
@@ -127,37 +131,56 @@ public class main {
                     n = new Ruta(r.getRuta(), r.getRuta_acortada(), usuario);
                     rutaService.update(n);
                 }
-                attributes.put("list", rutaService.getByUser(usuario.getId()));
+                attributes.put("list", rutaService.getPagination(pagina, usuario.getId()));
+                attributes.put("actual", pagina);
+                attributes.put("paginas", Math.ceil(rutaService.cantPag(usuario.getId()) / 5f));
                 attributes.put("ruta", rutaService.getByUser(usuario.getId()));
             }
-
             return new ModelAndView(attributes, "inicio.ftl");
         }, freeMarkerEngine);
 
         get("/stats/:id", (request, response) -> {
-
             Map<String, Object> attributes = new HashMap<>();
             userLevel(attributes);
+            String id = request.params("id");
+            int rid = Integer.parseInt(id);
+            attributes.put("link", rutaService.getById(rid));
             return new ModelAndView(attributes, "stats.ftl");
         }, freeMarkerEngine);
-        get("/links_usuario/:id", (request, response) -> {
+
+        get("/links_usuario/:id/:pag", (request, response) -> {
             String id = request.params("id");
             long userid = Integer.parseInt(id);
+            String p = request.params("pag");
+            int pagina = Integer.parseInt(p);
             Map<String, Object> attributes = new HashMap<>();
             userLevel(attributes);
-            attributes.put("list", rutaService.getByUser(userid));
-            attributes.put("ruta", rutaService.getByUser(userid));
+            attributes.put("actual", pagina);
+            attributes.put("paginas", Math.ceil(rutaService.cantPagNulls() / 5f));
+            attributes.put("list", rutaService.getPagination(pagina, userid));
+            attributes.put("ruta", rutaService.getPagination(pagina, userid));
             attributes.put("user", usuarioService.getById(userid));
             return new ModelAndView(attributes, "links_usuario.ftl");
         }, freeMarkerEngine);
 
-        get("/adminPanel", (request, response) -> {
+        get("/adminPanel/:pag/:pagl", (request, response) -> {
             Map<String, Object> attributes = new HashMap<>();
             userLevel(attributes);
-            attributes.put("list", rutaService.getAll());
-            attributes.put("ruta", rutaService.getAll());
-            attributes.put("list2", usuarioService.getAll());
-            attributes.put("user", usuarioService.getAll());
+            String p = request.params("pag");
+            int pagina = Integer.parseInt(p);
+            String pl = request.params("pagl");
+            int paginal = Integer.parseInt(pl);
+
+//            //-----------paginacion usuarios
+            attributes.put("actual", pagina);
+            attributes.put("paginas", Math.ceil(usuarioService.getAll().size() / 5f));
+            attributes.put("list", usuarioService.getPagination(pagina));
+            attributes.put("user", usuarioService.getPagination(pagina));
+//            //-----------paginacion links
+            attributes.put("actuall", paginal);
+            attributes.put("list2", rutaService.getPagAll(paginal));
+            attributes.put("paginasl", Math.ceil(rutaService.getAll().size() / 5f));
+            attributes.put("ruta2", rutaService.getPagAll(paginal));
             return new ModelAndView(attributes, "admin_panel.ftl");
         }, freeMarkerEngine);
 
@@ -192,12 +215,28 @@ public class main {
             response.redirect("/inicio/1");
             return "";
         });
-        get("/borrarlink/:id", (request, response) -> {
+        get("/borrarlink/:id/:pag", (request, response) -> {
+            String pag = request.params("pag");
             String id = request.params("id");
             long rutaid = Integer.parseInt(id);
+            long pagnum = Integer.parseInt(pag);
             Ruta r = rutaService.getById(rutaid);
             rutaService.delete(r);
-            response.redirect("/inicio/1");
+            if (pagnum == 1) {
+                response.redirect("/inicio/1");
+            } else if (pagnum == 2) {
+                response.redirect("/adminPanel/1/1");
+            }
+            return "";
+        });
+        get("/borrarlink2/:ruta/:id", (request, response) -> {
+            String ruta = request.params("ruta");
+            String id = request.params("id");
+            long userid = Integer.parseInt(id);
+            long rutaid = Integer.parseInt(ruta);
+            Ruta r = rutaService.getById(rutaid);
+            rutaService.delete(r);
+            response.redirect("/links_usuario/" + userid + "/1");
             return "";
         });
 
@@ -215,9 +254,8 @@ public class main {
             String id = request.params("id");
             long userid = Integer.parseInt(id);
             Usuario u = usuarioService.getById(userid);
-            usuarioService.delete(u);
             Boolean level = !u.getAdministrator();
-            Usuario nu = new Usuario(u.getUsername(),u.getNombre(),u.getPassword(),level);
+            Usuario nu = new Usuario(u.getUsername(), u.getNombre(), u.getPassword(), level);
             usuarioService.update(nu);
             response.redirect("/adminPanel");
             return "";
@@ -409,6 +447,8 @@ public class main {
 
             });
         });
+        new Filtros().filtros();
+
     }
 
 

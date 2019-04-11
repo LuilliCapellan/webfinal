@@ -12,10 +12,11 @@
     <title>Acortador URL - Final Web1 - 2014-0984</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
 
     <!-- Custom styles for this template -->
-    <link href="../css/blog-home.css" rel="stylesheet">
+    <link href="../../css/blog-home.css" rel="stylesheet">
 
 </head>
 
@@ -89,7 +90,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <#list list2 as user>
+                                    <#list list as user>
                                         <tr>
                                             <td>
                                                 ${user.username}
@@ -98,7 +99,7 @@
                                                 ${user.nombre}
                                             </td>
                                             <td>
-                                                <a href="/links_usuario/${user.id}" class="badge badge-dark">22</a>
+                                                <a href="/links_usuario/${user.id}/1" class="badge badge-dark">22</a>
                                             </td>
                                             <td>
                                                 <#if user.administrator >
@@ -112,7 +113,33 @@
                                 </table>
                             </div>
                         </div>
+
                     </div>
+                    <ul class="pagination justify-content-center mb-4">
+                        <#if actual gt 1>
+                            <li class="page-item">
+                                <a class="page-link" href="/adminPanel/${actual - 1}">&larr; Atras</a>
+                            </li>
+
+                        <#else>
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#">Atras &larr;</a>
+                            </li>
+
+                        </#if>
+
+                        <#if paginas gt actual>
+                            <li class="page-item">
+                                <a class="page-link" href="/inicio/${actual + 1}">&rarr; Siguiente</a>
+                            </li>
+                        <#else>
+
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#">Siguiente &rarr;</a>
+                            </li>
+
+                        </#if>
+                    </ul>
                 </div>
             </div>
             <div class="card">
@@ -142,19 +169,20 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <#list list as ruta>
+                                    <#list list2 as ruta>
                                         <tr>
                                             <td class="col">
                                                 <a class="link-preview"
                                                    href="${ruta.ruta}"></a></td>
                                             <td><a href="#" class="badge badge-dark">${ruta.ruta_acortada}</a></td>
-                                            <td><a href="#" class="badge badge-dark">${ruta.usuario.nombre}</a></td>
+                                            <td><a href="/links_usuario/${ruta.usuario.id}/1"
+                                                   class="badge badge-dark">${ruta.usuario.nombre}</a></td>
                                             <td>
                                                 <a href="/stats/${ruta.id}" class="btn btn-primary">
                                                     Estadisticas
                                                 </a></td>
                                             <td>
-                                                <a href="/borrarlink/${ruta.id}" class="btn btn-danger">
+                                                <a href="/borrarlink/${ruta.id}/2" class="btn btn-danger">
                                                     Borrar
                                                 </a>
                                             </td>
@@ -164,7 +192,33 @@
                                 </table>
                             </div>
                         </div>
+
                     </div>
+                    <ul class="pagination justify-content-center mb-4">
+                        <#if actuall gt 1>
+                            <li class="page-item">
+                                <a class="page-link" href="/adminPanel/${actual}/${actuall - 1}">&larr; Atras</a>
+                            </li>
+
+                        <#else>
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#">Atras &larr;</a>
+                            </li>
+
+                        </#if>
+
+                        <#if paginasl gt actuall>
+                            <li class="page-item">
+                                <a class="page-link" href="/adminPanel/${actual}/${actuall + 1}">&rarr; Siguiente</a>
+                            </li>
+                        <#else>
+
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#">Siguiente &rarr;</a>
+                            </li>
+
+                        </#if>
+                    </ul>
                 </div>
             </div>
 
@@ -175,7 +229,7 @@
 <!-- /.container -->
 
 <!-- Footer -->
-<footer class="py-5 bg-dark">
+<footer class="py-5 bg-dark embed-responsive">
     <div class="container">
         <p class="m-0 text-center text-white">Luis Capellan - 2014-0984</p>
     </div>
@@ -185,11 +239,11 @@
 </footer>
 
 <!-- Bootstrap core JavaScript -->
-<script src="../vendor/jquery/jquery.min.js"></script>
-<script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="../vendor/bootstrap/js/jquery.min.js"></script>
-<script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
-<script src="../vendor/bootstrap/js/my-login.js"></script>
+<script src="../../vendor/jquery/jquery.min.js"></script>
+<script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="../../vendor/bootstrap/js/jquery.min.js"></script>
+<script src="../../vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="../../vendor/bootstrap/js/my-login.js"></script>
 
 </body>
 

@@ -31,6 +31,7 @@ public interface RutaDAO {
     int cantPagNulls();
 
     List<Ruta>getNullsPagination(int pag);
+    List<Ruta>getPagAll(int pag);
 
 
 }

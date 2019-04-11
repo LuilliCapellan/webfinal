@@ -2,20 +2,26 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0d9e23fb-6db5-45cb-b599-d84a1baae71f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/modelo/EntityServices/utils/Filtros.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/classes/dao/Implementations/RutaDAOImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/dao/Implementations/RutaDAOImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/dao/Implementations/UsuarioDAOImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/dao/Implementations/UsuarioDAOImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/classes/dao/interfaces/RutaDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/dao/interfaces/RutaDAO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/encapsulacion/Ruta.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/encapsulacion/Ruta.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/dao/interfaces/UsuarioDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/dao/interfaces/UsuarioDAO.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/classes/main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/classes/modelo/EntityServices/EntityServices/RutaService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/modelo/EntityServices/EntityServices/RutaService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/modelo/EntityServices/EntityServices/UsuarioService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/modelo/EntityServices/EntityServices/UsuarioService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/modelo/EntityServices/utils/Filtros.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/modelo/EntityServices/utils/Filtros.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/resources/template/admin_panel.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/template/admin_panel.ftl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/resources/template/inicio.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/template/inicio.ftl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/template/links_usuario.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/template/links_usuario.ftl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dao/Implementations/RutaDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/Implementations/RutaDAOImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dao/Implementations/UsuarioDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/Implementations/UsuarioDAOImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dao/interfaces/RutaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/interfaces/RutaDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/encapsulacion/Ruta.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/encapsulacion/Ruta.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dao/interfaces/UsuarioDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/interfaces/UsuarioDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/modelo/EntityServices/EntityServices/RutaService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/modelo/EntityServices/EntityServices/RutaService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/modelo/EntityServices/EntityServices/UsuarioService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/modelo/EntityServices/EntityServices/UsuarioService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/modelo/EntityServices/utils/Filtros.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/modelo/EntityServices/utils/Filtros.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/template/admin_panel.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/template/admin_panel.ftl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/template/inicio.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/template/inicio.ftl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/template/links_usuario.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/template/links_usuario.ftl" afterDir="false" />
@@ -57,27 +63,6 @@
         <item name="FINAL: database" type="2aa06773:H2ImplModel$Database" />
         <item name="PUBLIC: schema" type="7f85d983:H2ImplModel$Schema" />
       </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="jdbc:h2:tcp://localhost/~/final" type="feb32156:DbDataSourceImpl" />
-        <item name="FINAL: database" type="2aa06773:H2ImplModel$Database" />
-        <item name="PUBLIC: schema" type="7f85d983:H2ImplModel$Schema" />
-        <item name="RUTA: table" type="818c1b4a:H2ImplModel$Table" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="jdbc:h2:tcp://localhost/~/final" type="feb32156:DbDataSourceImpl" />
-        <item name="FINAL: database" type="2aa06773:H2ImplModel$Database" />
-        <item name="PUBLIC: schema" type="7f85d983:H2ImplModel$Schema" />
-        <item name="USUARIO: table" type="818c1b4a:H2ImplModel$Table" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="jdbc:h2:tcp://localhost/~/final" type="feb32156:DbDataSourceImpl" />
-        <item name="FINAL: database" type="2aa06773:H2ImplModel$Database" />
-        <item name="PUBLIC: schema" type="7f85d983:H2ImplModel$Schema" />
-        <item name="VISITA: table" type="818c1b4a:H2ImplModel$Table" />
-      </path>
     </expand>
     <select />
   </component>
@@ -105,11 +90,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/template/stats.ftl">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="258">
+              <caret line="108" column="45" lean-forward="true" selection-start-line="108" selection-start-column="45" selection-end-line="108" selection-end-column="45" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="120" column="55" lean-forward="true" selection-start-line="120" selection-start-column="55" selection-end-line="120" selection-end-column="55" />
+            <state relative-caret-position="25">
+              <caret line="132" column="13" selection-start-line="132" selection-start-column="13" selection-end-line="132" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -118,74 +112,19 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/template/inicio.ftl">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/template/login.ftl">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="253">
-              <caret line="97" lean-forward="true" selection-start-line="97" selection-end-line="97" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/dao/Implementations/RutaDAOImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="623">
-              <caret line="103" column="44" lean-forward="true" selection-start-line="103" selection-start-column="44" selection-end-line="103" selection-end-column="44" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#418#419#0" expanded="true" />
-                <element signature="e#442#443#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="439">
+              <caret line="43" column="40" lean-forward="true" selection-start-line="43" selection-start-column="40" selection-end-line="43" selection-end-column="40" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/encapsulacion/Ruta.java">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/template/links_usuario.ftl">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-435">
-              <caret line="6" column="50" selection-start-line="6" selection-start-column="40" selection-end-line="6" selection-end-column="50" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/modelo/EntityServices/EntityServices/RutaService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="761">
-              <caret line="79" column="13" lean-forward="true" selection-start-line="79" selection-start-column="13" selection-end-line="79" selection-end-column="13" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#736#737#0" expanded="true" />
-                <element signature="e#769#770#0" expanded="true" />
-                <element signature="e#817#818#0" expanded="true" />
-                <element signature="e#856#857#0" expanded="true" />
-                <element signature="e#1362#1363#0" expanded="true" />
-                <element signature="e#1403#1404#0" expanded="true" />
-                <element signature="e#1465#1466#0" expanded="true" />
-                <element signature="e#1492#1493#0" expanded="true" />
-                <element signature="e#1575#1576#0" expanded="true" />
-                <element signature="e#1599#1600#0" expanded="true" />
-                <element signature="e#1646#1647#0" expanded="true" />
-                <element signature="e#1670#1671#0" expanded="true" />
-                <element signature="e#1737#1738#0" expanded="true" />
-                <element signature="e#1764#1765#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/dao/interfaces/RutaDAO.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="598">
-              <caret line="26" column="47" lean-forward="true" selection-start-line="26" selection-start-column="47" selection-end-line="26" selection-end-column="47" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="301">
+              <caret line="97" column="45" lean-forward="true" selection-start-line="97" selection-start-column="45" selection-end-line="97" selection-end-column="45" />
             </state>
           </provider>
         </entry>
@@ -199,6 +138,13 @@
       </list>
     </option>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>jquery/jquery.min.js</find>
+      <find>jq</find>
+      <find>&lt;</find>
+    </findStrings>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -211,13 +157,11 @@
         <option value="$PROJECT_DIR$/src/main/java/modelo/EntityServices/UsuarioService.java" />
         <option value="$PROJECT_DIR$/src/main/java/dao/UsuarioDAO.java" />
         <option value="$PROJECT_DIR$/src/main/java/dao/UsuarioDAOImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/modelo/EntityServices/EntityServices/UsuarioService.java" />
         <option value="$PROJECT_DIR$/src/main/java/modelo/EntityServices/utils/ServiceInit.java" />
         <option value="$PROJECT_DIR$/src/main/resources/template/agregarUsuario.ftl" />
         <option value="$PROJECT_DIR$/src/main/java/modelo/EntityServices/utils/CRUD.java" />
         <option value="$PROJECT_DIR$/src/main/java/modelo/EntityServices/utils/DBService.java" />
         <option value="$PROJECT_DIR$/src/main/resources/template/login.ftl" />
-        <option value="$PROJECT_DIR$/src/main/java/dao/Implementations/UsuarioDAOImpl.java" />
         <option value="$PROJECT_DIR$/src/main/resources/META-INF/usuarios.ftl" />
         <option value="$PROJECT_DIR$/src/main/resources/template/links.ftl" />
         <option value="$PROJECT_DIR$/src/main/java/modelo/EntityServices/utils/Rest/JsonUtilidades.java" />
@@ -230,20 +174,23 @@
         <option value="$PROJECT_DIR$/src/main/java/modelo/EntityServices/EntityServices/VisitaService.java" />
         <option value="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" />
         <option value="$PROJECT_DIR$/src/main/java/encapsulacion/Ruta.java" />
-        <option value="$PROJECT_DIR$/src/main/java/modelo/EntityServices/utils/Filtros.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/template/links_usuario.ftl" />
-        <option value="$PROJECT_DIR$/src/main/resources/template/inicio.ftl" />
-        <option value="$PROJECT_DIR$/src/main/resources/template/stats.ftl" />
-        <option value="$PROJECT_DIR$/src/main/resources/template/admin_panel.ftl" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/.datagrid/cell" />
-        <option value="$PROJECT_DIR$/src/main/java/main.java" />
         <option value="$PROJECT_DIR$/src/main/java/dao/interfaces/RutaDAO.java" />
         <option value="$PROJECT_DIR$/src/main/java/modelo/EntityServices/EntityServices/RutaService.java" />
         <option value="$PROJECT_DIR$/src/main/java/dao/Implementations/RutaDAOImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/dao/interfaces/UsuarioDAO.java" />
+        <option value="$PROJECT_DIR$/src/main/java/dao/Implementations/UsuarioDAOImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/modelo/EntityServices/EntityServices/UsuarioService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/modelo/EntityServices/utils/Filtros.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/template/admin_panel.ftl" />
+        <option value="$PROJECT_DIR$/src/main/resources/template/links_usuario.ftl" />
+        <option value="$PROJECT_DIR$/src/main/resources/template/inicio.ftl" />
+        <option value="$PROJECT_DIR$/src/main/java/main.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/template/stats.ftl" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
     <option name="width" value="1936" />
@@ -375,7 +322,7 @@
     <property name="DatabaseDriversLRU" value="h2" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1554996465142" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1555005402475" />
     <property name="database.console.LAST_STATE" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../sparkjava-restful-master" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -434,12 +381,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1554675707888</updated>
-      <workItem from="1554675712041" duration="67195000" />
+      <workItem from="1554675712041" duration="75798000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="67195000" />
+    <option name="totallyTimeSpent" value="75798000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1096" extended-state="6" />
@@ -450,7 +397,7 @@
       <window_info id="UI Designer" order="2" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info id="Image Layers" order="4" />
-      <window_info active="true" content_ui="combo" id="Project" order="5" visible="true" weight="0.1881663" />
+      <window_info content_ui="combo" id="Project" order="5" visible="true" weight="0.1881663" />
       <window_info id="Designer" order="6" />
       <window_info id="Structure" order="7" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Database Console" order="0" weight="0.32977587" />
@@ -464,7 +411,7 @@
       <window_info anchor="bottom" id="Build" order="8" weight="0.32977587" />
       <window_info anchor="bottom" id="Message" order="9" />
       <window_info anchor="bottom" id="Find" order="10" weight="0.32977587" />
-      <window_info anchor="bottom" id="Run" order="11" weight="0.32977587" />
+      <window_info active="true" anchor="bottom" id="Run" order="11" visible="true" weight="0.32977587" />
       <window_info anchor="bottom" id="Debug" order="12" weight="0.3991462" />
       <window_info anchor="bottom" id="Cvs" order="13" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="14" weight="0.4" />
@@ -472,7 +419,7 @@
       <window_info anchor="right" id="Palette" order="0" />
       <window_info anchor="right" id="Capture Analysis" order="1" />
       <window_info anchor="right" id="Gradle" order="2" weight="0.32995737" />
-      <window_info anchor="right" id="Database" order="3" visible="true" weight="0.18017058" />
+      <window_info anchor="right" id="Database" order="3" weight="0.18017058" />
       <window_info anchor="right" id="Palette&#9;" order="4" />
       <window_info anchor="right" id="Theme Preview" order="5" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="6" type="SLIDING" weight="0.4" />
@@ -565,16 +512,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/template/login.ftl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1265">
-          <caret line="55" column="36" selection-start-line="52" selection-start-column="32" selection-end-line="55" selection-end-column="36" />
-          <folding>
-            <element signature="n#style#0;n#a#0;n#div#4;n#form#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/modelo/EntityServices/utils/Crypto.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="196">
@@ -653,17 +590,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/template/agregarUsuario.ftl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-46">
-          <caret line="31" column="30" lean-forward="true" selection-start-line="31" selection-start-column="30" selection-end-line="32" selection-end-column="82" />
-          <folding>
-            <element signature="n#style#0;n#form#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#button#0;n#form#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/modelo/EntityServices/utils/shortRuta.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="46">
@@ -697,13 +623,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/dao/interfaces/UsuarioDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="das://3f96cbd0-47fb-45e1-8406-294b34479bed/database/FINAL/schema/PUBLIC/table/RUTA">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
@@ -711,38 +630,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/modelo/EntityServices/utils/Filtros.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="19" column="15" lean-forward="true" selection-start-line="16" selection-start-column="11" selection-end-line="19" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="690">
           <caret line="30" column="64" selection-start-line="30" selection-start-column="64" selection-end-line="30" selection-end-column="64" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/template/links_usuario.ftl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="163">
-          <caret line="70" column="42" selection-start-line="70" selection-start-column="42" selection-end-line="70" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/template/stats.ftl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="101" column="40" lean-forward="true" selection-start-line="101" selection-start-column="40" selection-end-line="101" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/template/admin_panel.ftl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="462">
-          <caret line="106" column="92" selection-start-line="106" selection-start-column="83" selection-end-line="106" selection-end-column="92" />
         </state>
       </provider>
     </entry>
@@ -757,10 +648,98 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/encapsulacion/Ruta.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="6" column="50" selection-start-line="6" selection-start-column="40" selection-end-line="6" selection-end-column="50" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/modelo/EntityServices/EntityServices/RutaService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="51" column="27" selection-start-line="51" selection-start-column="27" selection-end-line="51" selection-end-column="27" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#736#737#0" expanded="true" />
+            <element signature="e#769#770#0" expanded="true" />
+            <element signature="e#817#818#0" expanded="true" />
+            <element signature="e#856#857#0" expanded="true" />
+            <element signature="e#1011#1012#0" expanded="true" />
+            <element signature="e#1060#1061#0" expanded="true" />
+            <element signature="e#1362#1363#0" expanded="true" />
+            <element signature="e#1403#1404#0" expanded="true" />
+            <element signature="e#1465#1466#0" expanded="true" />
+            <element signature="e#1492#1493#0" expanded="true" />
+            <element signature="e#1575#1576#0" expanded="true" />
+            <element signature="e#1599#1600#0" expanded="true" />
+            <element signature="e#1646#1647#0" expanded="true" />
+            <element signature="e#1670#1671#0" expanded="true" />
+            <element signature="e#1737#1738#0" expanded="true" />
+            <element signature="e#1764#1765#0" expanded="true" />
+            <element signature="e#1888#1889#0" expanded="true" />
+            <element signature="e#1933#1934#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/dao/interfaces/RutaDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="508">
+          <caret line="26" column="36" lean-forward="true" selection-start-line="26" selection-start-column="3" selection-end-line="26" selection-end-column="36" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/dao/interfaces/UsuarioDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="20" column="41" lean-forward="true" selection-start-line="20" selection-start-column="41" selection-end-line="20" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/dao/Implementations/RutaDAOImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="276">
+          <caret line="75" column="37" selection-start-line="75" selection-start-column="37" selection-end-line="75" selection-end-column="37" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#418#419#0" expanded="true" />
+            <element signature="e#442#443#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/lib/platform-impl.jar!/resources/html5-schema/html5/tables.rnc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1955">
+          <caret line="216" column="16" selection-start-line="216" selection-start-column="16" selection-end-line="216" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
     <entry file="das://3f96cbd0-47fb-45e1-8406-294b34479bed/database/FINAL/schema/PUBLIC/table/USUARIO">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
           <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/modelo/EntityServices/utils/Filtros.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="437">
+          <caret line="21" column="67" selection-start-line="21" selection-start-column="67" selection-end-line="21" selection-end-column="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/template/agregarUsuario.ftl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1033">
+          <caret line="31" column="30" lean-forward="true" selection-start-line="31" selection-start-column="30" selection-end-line="32" selection-end-column="82" />
         </state>
       </provider>
     </entry>
@@ -785,7 +764,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/modelo/EntityServices/EntityServices/UsuarioService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
+        <state relative-caret-position="278">
           <caret line="36" selection-start-line="36" selection-end-line="36" />
           <folding>
             <element signature="e#506#507#0" expanded="true" />
@@ -793,80 +772,54 @@
             <element signature="e#829#830#0" expanded="true" />
             <element signature="e#880#881#0" expanded="true" />
             <element signature="e#922#923#0" expanded="true" />
+            <element signature="e#1220#1221#0" expanded="true" />
+            <element signature="e#1272#1273#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/template/login.ftl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="439">
+          <caret line="43" column="40" lean-forward="true" selection-start-line="43" selection-start-column="40" selection-end-line="43" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/template/links_usuario.ftl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="301">
+          <caret line="97" column="45" lean-forward="true" selection-start-line="97" selection-start-column="45" selection-end-line="97" selection-end-column="45" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="120" column="55" lean-forward="true" selection-start-line="120" selection-start-column="55" selection-end-line="120" selection-end-column="55" />
+        <state relative-caret-position="25">
+          <caret line="132" column="13" selection-start-line="132" selection-start-column="13" selection-end-line="132" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/template/admin_panel.ftl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="347">
+          <caret line="184" column="78" selection-start-line="184" selection-start-column="76" selection-end-line="184" selection-end-column="78" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/template/inicio.ftl">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="97" lean-forward="true" selection-start-line="97" selection-end-line="97" />
+        <state relative-caret-position="186">
+          <caret line="112" column="37" lean-forward="true" selection-start-line="112" selection-start-column="37" selection-end-line="112" selection-end-column="37" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/dao/interfaces/RutaDAO.java">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/template/stats.ftl">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="598">
-          <caret line="26" column="47" lean-forward="true" selection-start-line="26" selection-start-column="47" selection-end-line="26" selection-end-column="47" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/modelo/EntityServices/EntityServices/RutaService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="761">
-          <caret line="79" column="13" lean-forward="true" selection-start-line="79" selection-start-column="13" selection-end-line="79" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#736#737#0" expanded="true" />
-            <element signature="e#769#770#0" expanded="true" />
-            <element signature="e#817#818#0" expanded="true" />
-            <element signature="e#856#857#0" expanded="true" />
-            <element signature="e#1362#1363#0" expanded="true" />
-            <element signature="e#1403#1404#0" expanded="true" />
-            <element signature="e#1465#1466#0" expanded="true" />
-            <element signature="e#1492#1493#0" expanded="true" />
-            <element signature="e#1575#1576#0" expanded="true" />
-            <element signature="e#1599#1600#0" expanded="true" />
-            <element signature="e#1646#1647#0" expanded="true" />
-            <element signature="e#1670#1671#0" expanded="true" />
-            <element signature="e#1737#1738#0" expanded="true" />
-            <element signature="e#1764#1765#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/encapsulacion/Ruta.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-435">
-          <caret line="6" column="50" selection-start-line="6" selection-start-column="40" selection-end-line="6" selection-end-column="50" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/dao/Implementations/RutaDAOImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="623">
-          <caret line="103" column="44" lean-forward="true" selection-start-line="103" selection-start-column="44" selection-end-line="103" selection-end-column="44" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#418#419#0" expanded="true" />
-            <element signature="e#442#443#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="258">
+          <caret line="108" column="45" lean-forward="true" selection-start-line="108" selection-start-column="45" selection-end-line="108" selection-end-column="45" />
         </state>
       </provider>
     </entry>
