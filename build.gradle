@@ -15,7 +15,7 @@ buildscript {
 }
 sourceCompatibility = 1.8
 
-mainClassName = 'main.java.main'
+mainClassName = 'main.Main'
 
 repositories {
     mavenCentral()

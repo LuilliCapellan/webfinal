@@ -24,7 +24,7 @@ import java.util.Map;
 
 import static spark.Spark.*;
 
-public class main {
+public class Main {
     public static Usuario usuario;
     static final String iv = "0123456789123456"; // This has to be 16 characters
     static final String secretKeyUSer = "qwerty987654321";
@@ -53,7 +53,7 @@ public class main {
         }
 
         Configuration configuration = new Configuration(new Version(2, 3, 0));
-        configuration.setClassForTemplateLoading(main.class, "/template");
+        configuration.setClassForTemplateLoading(Main.class, "/template");
 
         FreeMarkerEngine freeMarkerEngine = new FreeMarkerEngine(configuration);
 
@@ -326,7 +326,7 @@ public class main {
                 }, JsonUtilidades.json());
 
                 //crea un usuario
-                post("/", main.ACCEPT_TYPE_JSON, (request, response) -> {
+                post("/", Main.ACCEPT_TYPE_JSON, (request, response) -> {
 
                     Usuario usuario = null;
                     usuario = new Gson().fromJson(request.body(), Usuario.class);
@@ -335,12 +335,12 @@ public class main {
                 }, JsonUtilidades.json());
 
                 //
-                post("/", main.ACCEPT_TYPE_XML, (request, response) -> {
+                post("/", Main.ACCEPT_TYPE_XML, (request, response) -> {
                     return true;
                 }, JsonUtilidades.json());
 
                 //actualiza un usuario
-                put("/", main.ACCEPT_TYPE_JSON, (request, response) -> {
+                put("/", Main.ACCEPT_TYPE_JSON, (request, response) -> {
                     Usuario usuario = new Gson().fromJson(request.body(), Usuario.class);
                     usuarioService.update(usuario);
                     return true;
@@ -379,7 +379,7 @@ public class main {
 
                 }, JsonUtilidades.json());
                 //crea una ruta
-                post("/", main.ACCEPT_TYPE_JSON, (request, response) -> {
+                post("/", Main.ACCEPT_TYPE_JSON, (request, response) -> {
 
                     Ruta ruta = null;
 
@@ -389,12 +389,12 @@ public class main {
                 }, JsonUtilidades.json());
 
                 //
-                post("/", main.ACCEPT_TYPE_XML, (request, response) -> {
+                post("/", Main.ACCEPT_TYPE_XML, (request, response) -> {
                     return true;
                 }, JsonUtilidades.json());
 
                 //actualiza una ruta
-                put("/", main.ACCEPT_TYPE_JSON, (request, response) -> {
+                put("/", Main.ACCEPT_TYPE_JSON, (request, response) -> {
                     Ruta ruta = new Gson().fromJson(request.body(), Ruta.class);
                     rutaService.update(ruta);
                     return true;
@@ -426,7 +426,7 @@ public class main {
                 }, JsonUtilidades.json());
 
                 //crea una ruta
-                post("/", main.ACCEPT_TYPE_JSON, (request, response) -> {
+                post("/", Main.ACCEPT_TYPE_JSON, (request, response) -> {
 
                     Visita visita = null;
                     visita = new Gson().fromJson(request.body(), Visita.class);
@@ -436,12 +436,12 @@ public class main {
                 }, JsonUtilidades.json());
 
                 //
-                post("/", main.ACCEPT_TYPE_XML, (request, response) -> {
+                post("/",  Main.ACCEPT_TYPE_XML, (request, response) -> {
                     return true;
                 }, JsonUtilidades.json());
 
                 //actualiza una ruta
-                put("/", main.ACCEPT_TYPE_JSON, (request, response) -> {
+                put("/", Main.ACCEPT_TYPE_JSON, (request, response) -> {
                     Visita visita = new Gson().fromJson(request.body(), Visita.class);
                     visitaService.update(visita);
                     return true;
