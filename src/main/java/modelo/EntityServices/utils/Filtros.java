@@ -1,6 +1,7 @@
 package modelo.EntityServices.utils;
 
 import encapsulacion.Usuario;
+import modelo.EntityServices.EntityServices.RutaService;
 
 import static spark.Spark.before;
 
@@ -11,23 +12,49 @@ public class Filtros {
         before((request, response) -> System.out.println("Ruta antes: " + request.pathInfo()));
         before("/inicio", (request, response) -> response.redirect("/inicio/1"));
 
-        before("/adminPanel", (request, response) -> {
+        before("/adminPanel/:pag/:pagl", (request, response) -> {
             Usuario usuario = request.session(true).attribute("usuario");
             if (usuario == null || !usuario.getAdministrator()) {
                 response.redirect("/inicio/1");
             }
         });
 
-        before("/links_usuario", (request, response) -> {
+        before("/links_usuario/:id/:id", (request, response) -> {
             Usuario usuario = request.session(true).attribute("usuario");
             if (usuario == null || !usuario.getAdministrator()) {
                 response.redirect("/inicio/1");
             }
         });
 
-        before("/stats", (request, response) -> {
+        before("/stats/:id", (request, response) -> {
             Usuario usuario = request.session(true).attribute("usuario");
             if (usuario == null) {
+                response.redirect("/inicio/1");
+            }
+        });
+        before("/borrarlink/:id/:ruta", (request, response) -> {
+            Usuario usuario = request.session(true).attribute("usuario");
+            String ruta = request.params("ruta");
+            String id = request.params("id");
+            long userid = Integer.parseInt(id);
+            long rutaid = Integer.parseInt(ruta);
+            if (usuario == null /*|| usuario.getId() == RutaService.getInstancia().getById(rutaid).getUsuario().getId() */||!usuario.getAdministrator()) {
+                response.redirect("/inicio/1");
+            }
+        });
+        before("/userlevel/:id", (request, response) -> {
+            Usuario usuario = request.session(true).attribute("usuario");
+            if (usuario == null || !usuario.getAdministrator()) {
+                response.redirect("/inicio/1");
+            }
+        });
+        before("/borrarlink2/:id/:ruta", (request, response) -> {
+            Usuario usuario = request.session(true).attribute("usuario");
+            String ruta = request.params("ruta");
+            String id = request.params("id");
+            long userid = Integer.parseInt(id);
+            long rutaid = Integer.parseInt(ruta);
+            if (usuario == null || usuario.getId() == userid || !usuario.getAdministrator()) {
                 response.redirect("/inicio/1");
             }
         });

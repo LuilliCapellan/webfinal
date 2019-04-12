@@ -174,7 +174,7 @@
                                             <td class="col">
                                                 <a class="link-preview"
                                                    href="${ruta.ruta}"></a></td>
-                                            <td><a href="#" class="badge badge-dark">${ruta.ruta_acortada}</a></td>
+                                            <td><a href="/${ruta.ruta_acortada}" class="badge badge-dark">http://lcapellan.me/${ruta.ruta_acortada}</a></td>
                                             <td><a href="/links_usuario/${ruta.usuario.id}/1"
                                                    class="badge badge-dark">${ruta.usuario.nombre}</a></td>
                                             <td>

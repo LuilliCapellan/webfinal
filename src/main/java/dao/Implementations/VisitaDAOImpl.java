@@ -54,7 +54,7 @@ public class VisitaDAOImpl extends CRUD<Visita> implements VisitaDAO {
     public List<Visita> getByRuta(long ruta_id) {
         EntityManager em = getEntityManager();
         Query query = em.createNamedQuery("Visita.findAllVisitaByRutaId");
-
+        query.setParameter("id", ruta_id);
         return (List<Visita>) query.getResultList();
     }
 

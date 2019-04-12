@@ -2,6 +2,7 @@ import com.google.gson.Gson;
 import encapsulacion.Ruta;
 import encapsulacion.Usuario;
 import encapsulacion.Visita;
+import eu.bitwalker.useragentutils.UserAgent;
 import freemarker.template.Configuration;
 import freemarker.template.Version;
 import modelo.EntityServices.EntityServices.RutaService;
@@ -15,7 +16,10 @@ import spark.ModelAndView;
 import spark.Session;
 import spark.template.freemarker.FreeMarkerEngine;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static spark.Spark.*;
@@ -116,6 +120,7 @@ public class main {
         get("/inicio/:pag", (request, response) -> {
             Map<String, Object> attributes = new HashMap<>();
             userLevel(attributes);
+
             String p = request.params("pag");
             int pagina = Integer.parseInt(p);
             Ruta n;
@@ -210,8 +215,8 @@ public class main {
         post("/agregarlink", (request, response) -> {
             String link = request.queryParams("link");
             Ruta r = new Ruta(link, "lcapellan.me/test", usuario);
-            System.out.println(r);
             RutaService.getInstancia().insert(r);
+            shortUrl(r.getId());
             response.redirect("/inicio/1");
             return "";
         });
@@ -255,11 +260,35 @@ public class main {
             long userid = Integer.parseInt(id);
             Usuario u = usuarioService.getById(userid);
             Boolean level = !u.getAdministrator();
-            Usuario nu = new Usuario(u.getUsername(), u.getNombre(), u.getPassword(), level);
+            Usuario nu = new Usuario(u.getId(), u.getUsername(), u.getNombre(), u.getPassword(), level);
             usuarioService.update(nu);
-            response.redirect("/adminPanel");
+            response.redirect("/adminPanel/1/1");
             return "";
         });
+        get("/:corto", (request, response) -> {
+            String corto = request.params("corto");
+            Ruta r = rutaService.getById(Long.parseLong(corto, 16));
+            Visita v = new Visita();
+            //DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+            Date date = new Date();
+            v.setFecha(date);
+            v.setIp(request.ip());
+            //---- system info
+            String os, browser;
+            UserAgent osagent = UserAgent.parseUserAgentString(request.headers("User-Agent"));
+            UserAgent.parseUserAgentString(request.headers("REMOTE_ADDR")).toString();
+            String[] parts = osagent.toString().split("-");
+//            os = parts[0];
+            browser = parts[1];
+            v.setNavegador(browser);
+            v.setRuta(r);
+            visitaService.insert(v);
+            response.redirect(r.getRuta());
+
+//            response.redirect(corto);
+            return "";
+        });
+
 
         //Rest
         //rutas servicios RESTFUL
@@ -300,17 +329,7 @@ public class main {
                 post("/", main.ACCEPT_TYPE_JSON, (request, response) -> {
 
                     Usuario usuario = null;
-
-                    //verificando el tipo de dato.
-                    switch (request.headers("Content-Type")) {
-                        case main.ACCEPT_TYPE_JSON:
-                            usuario = new Gson().fromJson(request.body(), Usuario.class);
-                            break;
-                        case main.ACCEPT_TYPE_XML:
-                            break;
-                        default:
-                            throw new IllegalArgumentException("Error el formato no disponible");
-                    }
+                    usuario = new Gson().fromJson(request.body(), Usuario.class);
                     usuarioService.insert(usuario);
                     return true;
                 }, JsonUtilidades.json());
@@ -351,22 +370,20 @@ public class main {
                     }
                     return ruta;
                 }, JsonUtilidades.json());
+                //retorna visitas de una ruta
+                get("/:id/visitas", (request, response) -> {
+                    Ruta ruta = rutaService.getById(Integer.parseInt(request.params("id")));
+                    long rutaid = ruta.getId();
+                    System.out.println(ruta.getId());
+                    return  visitaService.getByRuta(rutaid);
 
+                }, JsonUtilidades.json());
                 //crea una ruta
                 post("/", main.ACCEPT_TYPE_JSON, (request, response) -> {
 
                     Ruta ruta = null;
 
-                    //verificando el tipo de dato.
-                    switch (request.headers("Content-Type")) {
-                        case main.ACCEPT_TYPE_JSON:
-                            ruta = new Gson().fromJson(request.body(), Ruta.class);
-                            break;
-                        case main.ACCEPT_TYPE_XML:
-                            break;
-                        default:
-                            throw new IllegalArgumentException("Error el formato no disponible");
-                    }
+                    ruta = new Gson().fromJson(request.body(), Ruta.class);
                     rutaService.insert(ruta);
                     return true;
                 }, JsonUtilidades.json());
@@ -400,6 +417,7 @@ public class main {
 
                 //retorna una ruta
                 get("/:id", (request, response) -> {
+
                     Visita visita = visitaService.getById(Integer.parseInt(request.params("id")));
                     if (visita == null) {
                         throw new RuntimeException("No existe el cliente");
@@ -411,17 +429,8 @@ public class main {
                 post("/", main.ACCEPT_TYPE_JSON, (request, response) -> {
 
                     Visita visita = null;
+                    visita = new Gson().fromJson(request.body(), Visita.class);
 
-                    //verificando el tipo de dato.
-                    switch (request.headers("Content-Type")) {
-                        case main.ACCEPT_TYPE_JSON:
-                            visita = new Gson().fromJson(request.body(), Visita.class);
-                            break;
-                        case main.ACCEPT_TYPE_XML:
-                            break;
-                        default:
-                            throw new IllegalArgumentException("Error el formato no disponible");
-                    }
                     visitaService.insert(visita);
                     return true;
                 }, JsonUtilidades.json());
@@ -451,6 +460,18 @@ public class main {
 
     }
 
+    private static String getClientIp(HttpServletRequest request) {
+
+        String remoteAddr = "";
+
+        if (request != null) {
+            remoteAddr = request.getHeader("X-FORWARDED-FOR");
+            if (remoteAddr == null || "".equals(remoteAddr)) {
+                remoteAddr = request.getRemoteAddr();
+            }
+        }
+        return remoteAddr;
+    }
 
     private static void userLevel(Map<String, Object> attributes) {
         attributes.put("usuario", usuario);
@@ -458,6 +479,17 @@ public class main {
             attributes.put("admin", usuario.getAdministrator());
             attributes.put("usuarioName", usuario.getNombre());
         }
+    }
+
+    public static void shortUrl(long ruta_id) {
+        Ruta old = RutaService.getInstancia().getById(ruta_id);
+        String ruta_acortada = Long.toHexString(ruta_id);
+        Ruta r = new Ruta(old.getId(), old.getRuta(), ruta_acortada, old.getUsuario());
+        RutaService.getInstancia().update(r);
+    }
+
+    public void originalUrl(String ruta) {
+
     }
 
 }

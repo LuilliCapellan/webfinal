@@ -19,10 +19,92 @@
 
     <#--Google Charts-->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
     <script type="text/javascript">
-        google.charts.load('current', {packages: ['corechart']});
+        google.charts.load("current", {packages: ["corechart"]});
         google.charts.setOnLoadCallback(drawChart);
-        ...
+        google.charts.setOnLoadCallback(drawAxisTickColors);
+
+        function drawAxisTickColors() {
+            const Http = new XMLHttpRequest();
+            const url = 'http://localhost:4567/rest/rutas/${link.id}/visitas';
+            Http.open("GET", url);
+            Http.send();
+            let fecha = new Date();
+            Http.onreadystatechange = (e) => {
+                var data = new google.visualization.DataTable();
+                data.addColumn('date', 'Day');
+                data.addColumn('number', 'Visitas');
+                var o = JSON.parse(Http.response);
+                //console.log(o);
+                let cont = 0;
+                for (let i = 0; i < o.length; i++) {
+                    let pos = '' + i + '';
+                    //console.log(o[pos].fecha);
+                    cont++;
+                    fechas = o[pos].fecha;
+                    d = fechas;
+                    var d = new Date(o[pos].fecha);
+                    fecha = new Date(d);
+                    //console.log(d);
+                    data.addRow([new Date(o[pos].fecha), i]);
+
+                    // console.log(fecha);
+                    var classicOptions = {
+                        title: 'Visitas por mes',
+                        width: 1080,
+                        height: 500,
+                        // Gives each series an axis that matches the vAxes number below.
+                        series: {
+                            0: {targetAxisIndex: 0}
+                        },
+                        vAxes: {
+                            // Adds titles to each axis.
+                            0: {title: 'Visitas'},
+                        },
+                        hAxes: {
+                            // Adds titles to each axis.
+                            0: {title: 'Fecha'},
+                        },
+                        hAxis: {
+                            ticks: [
+                                new Date(2019, 4, 12),
+                                new Date(2019, 4, 13)
+                            ]
+                        },
+                        vAxis: {
+                            viewWindow: {
+                                max: 30
+                            }
+                        }
+                    };
+                    var chart = new google.visualization.LineChart(document.getElementById('myPieChart'));
+                    chart.draw(data, classicOptions);
+                }
+            };
+            // data.addRows([
+            //     [new Date(2014, 0), 5],
+            //     [new Date(2014, 1), 7],
+            //     [new Date(2014, 2), 1],
+            //     [new Date(2014, 3), 12],
+            //     [new Date(2014, 4), 4],
+            //     [new Date(2014, 5), 12],
+            //     [new Date(2014, 6), 10],
+            //     [new Date(2014, 7), 9],
+            //     [new Date(2014, 8), 8],
+            //     [new Date(2014, 9), 0],
+            //     [new Date(2014, 10), 1],
+            //     [new Date(2014, 11), 2]
+            // ]);
+
+        }
+
+
+        function drawChart() {
+            var chart = new google.visualization.BarChart(document.getElementById("barchart_values"));
+            chart.draw(view, options);
+        }
+
     </script>
 </head>
 
@@ -57,68 +139,41 @@
 </nav>
 <!-- Page Content -->
 <div class="container">
-
-    <script>
-        $(function () {
-            $("#generate").click(function () {
-                // $(".qr-code").attr("src", "https://chart.googleapis.com/chart?cht=qr&chl=" + htmlEncode($("#content").val()) + "&chs=160x160&chld=L|0");
-                $(".qr-code").attr("src", "https://chart.googleapis.com/chart?cht=qr&chl=" + ${link.ruta} +"&chs=160x160&chld=L|0");
-            });
-        });
-    </script>
     <div class="row">
+        <div class="col-md-8">
+            <!-- Post Content Column -->
+            <div class="col-lg-8">
+                <h2 class="mt-4">Visitas</h2>
+                <div class="lead">
 
-        <!-- Post Content Column -->
-        <div class="col-lg-8">
-
-            <div class="lead">
-                <!-- Title -->
-                <form method="post" action="/guardarUsuario" style="width: 500px">
-
-                    <div class="form-group">
-                        <h1 class="mt-4">Registrarse</h1>
-
-                        <label>Nombre de usuario</label>
-                        <input type="text" class="form-control" placeholder="username" aria-label="Username"
-                               name="usuario" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Nombre</label>
-                        <input type="text" class="form-control" rows="3" placeholder="John Doe" name="nombre" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Password</label>
-                        <input type="password" id="password" class="form-control" rows="3" name="pass" required
-                               data-eye>
-                    </div>
-
-                    <button style="float: right" type="submit" class="btn btn-primary">Registrar</button>
-                </form>
-            </div>
-
-
-        </div>
-        <!-- Sidebar Widgets Column -->
-        <div class="col-md-4">
-
-            <!-- Side Widget -->
-            <div class="card my-4">
-                <h5 class="card-header">Codigo QR</h5>
-                <div class="container-fluid">
-                    <div class="text-center">
-                        <img src="https://chart.googleapis.com/chart?cht=qr&chl=${link.ruta}&chs=160x160&chld=L|0"
-                             class="qr-code img-thumbnail img-responsive">
-                    </div>
+                    <div id="myPieChart"/>
                 </div>
+
             </div>
 
+
+            <!-- /.row -->
         </div>
 
     </div>
-    <!-- /.row -->
+    <!-- Sidebar Widgets Column -->
+    <div class="col-md-8">
+        <div id="barchart_values"></div>
 
+    </div>
+    <div class="col-md-4">
+        <!-- Side Widget -->
+        <div class="card my-4">
+            <h5 class="card-header">Codigo QR</h5>
+            <div class="container-fluid">
+                <div class="text-center">
+                    <img src="https://chart.googleapis.com/chart?cht=qr&chl=${link.ruta}&chs=160x160&chld=L|0"
+                         class="qr-code img-thumbnail img-responsive" alt="">
+                </div>
+            </div>
+        </div>
+
+    </div>
 </div>
 <!-- /.container -->
 

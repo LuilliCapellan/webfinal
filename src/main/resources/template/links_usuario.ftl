@@ -89,7 +89,7 @@
                             <td class="col">
                                 <a class="link-preview"
                                    href="${ruta.ruta}"></a></td>
-                            <td><a href="#" class="badge badge-dark">${ruta.ruta_acortada}</a></td>
+                            <td><a href="/${ruta.ruta_acortada}" class="badge badge-dark">lcapellan.me/${ruta.ruta_acortada}</a></td>
                             <td>
                                 <a href="/stats/${ruta.id}" class="btn btn-primary">
                                     Estadisticas
