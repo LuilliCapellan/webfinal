@@ -99,7 +99,7 @@
                                                 ${user.nombre}
                                             </td>
                                             <td>
-                                                <a href="/links_usuario/${user.id}/1" class="badge badge-dark">22</a>
+                                                <a href="/links_usuario/${user.id}/1" class="badge badge-dark">Links</a>
                                             </td>
                                             <td>
                                                 <#if user.administrator >

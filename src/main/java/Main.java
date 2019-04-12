@@ -186,6 +186,7 @@ public class Main {
             attributes.put("list2", rutaService.getPagAll(paginal));
             attributes.put("paginasl", Math.ceil(rutaService.getAll().size() / 5f));
             attributes.put("ruta2", rutaService.getPagAll(paginal));
+
             return new ModelAndView(attributes, "admin_panel.ftl");
         }, freeMarkerEngine);
 
