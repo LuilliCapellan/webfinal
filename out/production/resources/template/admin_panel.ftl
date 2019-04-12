@@ -175,7 +175,7 @@
                                                 <a class="link-preview"
                                                    href="${ruta.ruta}"></a></td>
                                             <td><a href="/${ruta.ruta_acortada}" class="badge badge-dark">http://lcapellan.me/${ruta.ruta_acortada}</a></td>
-                                            <td><a href="/links_usuario/${ruta.usuario.id}/1"
+                                            <td><a href="/links_usua    rio/${ruta.usuario.id}/1"
                                                    class="badge badge-dark">${ruta.usuario.nombre}</a></td>
                                             <td>
                                                 <a href="/stats/${ruta.id}" class="btn btn-primary">
