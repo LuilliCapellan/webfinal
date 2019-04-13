@@ -27,7 +27,7 @@
 
         function drawAxisTickColors() {
             const Http = new XMLHttpRequest();
-            const url = 'http://lcapellan.me/rest/rutas/${link.id}/visitas?token=' + sessionStorage.getItem("token");
+            const url = 'http://lcapellan.me/rest/rutas/${link.id}';
             Http.open("GET", url);
             Http.send();
             let fecha = new Date();

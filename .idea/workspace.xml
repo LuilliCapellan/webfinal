@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0d9e23fb-6db5-45cb-b599-d84a1baae71f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/3f96cbd0-47fb-45e1-8406-294b34479bed.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/3f96cbd0-47fb-45e1-8406-294b34479bed.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/template/stats.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/template/stats.ftl" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -68,11 +67,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="214">
-              <caret line="286" column="51" lean-forward="true" selection-start-line="286" selection-start-column="51" selection-end-line="286" selection-end-column="51" />
+            <state relative-caret-position="283">
+              <caret line="289" column="34" lean-forward="true" selection-start-line="289" selection-start-column="34" selection-end-line="289" selection-end-column="34" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -130,11 +129,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/resources/template/stats.ftl">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="158">
-              <caret line="9" column="16" selection-start-line="9" selection-start-column="16" selection-end-line="9" selection-end-column="16" />
+            <state relative-caret-position="414">
+              <caret line="33" column="46" lean-forward="true" selection-start-line="33" selection-start-column="46" selection-end-line="33" selection-end-column="46" />
             </state>
           </provider>
         </entry>
@@ -176,8 +175,8 @@
       <find>admin</find>
       <find>agregar</find>
       <find>update</find>
-      <find>corto</find>
       <find>short</find>
+      <find>corto</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -219,7 +218,6 @@
         <option value="$PROJECT_DIR$/src/main/resources/template/admin_panel.ftl" />
         <option value="$PROJECT_DIR$/src/main/resources/template/agregarUsuario.ftl" />
         <option value="$PROJECT_DIR$/src/main/resources/template/inicio.ftl" />
-        <option value="$PROJECT_DIR$/src/main/resources/template/stats.ftl" />
         <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/src/main/java/modelo/EntityServices/utils/SOAP/Arranque.java" />
         <option value="$PROJECT_DIR$/src/main/java/modelo/EntityServices/utils/SOAP/UsuarioSOAP.java" />
@@ -227,6 +225,7 @@
         <option value="$PROJECT_DIR$/src/main/resources/template/login.ftl" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/.datagrid/cell" />
         <option value="$PROJECT_DIR$/src/main/java/Main.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/template/stats.ftl" />
       </list>
     </option>
   </component>
@@ -353,7 +352,7 @@
     <property name="DatabaseDriversLRU" value="h2" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1555194656524" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1555194993602" />
     <property name="database.console.LAST_STATE" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../sparkjava-restful-master" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -422,12 +421,12 @@
       <option name="presentableId" value="Default" />
       <updated>1554675707888</updated>
       <workItem from="1554675712041" duration="117552000" />
-      <workItem from="1555160518482" duration="28546000" />
+      <workItem from="1555160518482" duration="28904000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="146098000" />
+    <option name="totallyTimeSpent" value="146456000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1096" extended-state="6" />
@@ -438,7 +437,7 @@
       <window_info id="UI Designer" order="2" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info id="Image Layers" order="4" />
-      <window_info content_ui="combo" id="Project" order="5" sideWeight="0.4994664" weight="0.23720682" />
+      <window_info active="true" content_ui="combo" id="Project" order="5" sideWeight="0.4994664" visible="true" weight="0.23720682" />
       <window_info id="Designer" order="6" />
       <window_info id="Structure" order="7" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Database Console" order="0" weight="0.32977587" />
@@ -452,7 +451,7 @@
       <window_info anchor="bottom" id="Build" order="8" weight="0.32977587" />
       <window_info anchor="bottom" id="Message" order="9" />
       <window_info anchor="bottom" id="Find" order="10" weight="0.32977587" />
-      <window_info active="true" anchor="bottom" id="Run" order="11" visible="true" weight="0.28922093" />
+      <window_info anchor="bottom" id="Run" order="11" visible="true" weight="0.28922093" />
       <window_info anchor="bottom" id="Debug" order="12" weight="0.3991462" />
       <window_info anchor="bottom" id="Cvs" order="13" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="14" weight="0.4" />
@@ -833,13 +832,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/template/stats.ftl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="158">
-          <caret line="9" column="16" selection-start-line="9" selection-start-column="16" selection-end-line="9" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="das://3f96cbd0-47fb-45e1-8406-294b34479bed/database/FINAL/schema/PUBLIC/table/RUTA">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
@@ -863,11 +855,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="214">
-          <caret line="286" column="51" lean-forward="true" selection-start-line="286" selection-start-column="51" selection-end-line="286" selection-end-column="51" />
+        <state relative-caret-position="283">
+          <caret line="289" column="34" lean-forward="true" selection-start-line="289" selection-start-column="34" selection-end-line="289" selection-end-column="34" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/template/stats.ftl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="33" column="46" lean-forward="true" selection-start-line="33" selection-start-column="46" selection-end-line="33" selection-end-column="46" />
         </state>
       </provider>
     </entry>
