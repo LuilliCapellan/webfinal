@@ -36,12 +36,6 @@
                                        data-eye value=${pass!x}>
                             </div>
 
-                            <div class="form-group">
-                                <label>
-                                    <input type="checkbox" id="remember" name="remember"> Recuerdame
-                                </label>
-                            </div>
-
                             <div class="form-group no-margin">
                                 <button type="submit" class="btn btn-primary btn-block">
                                     Login

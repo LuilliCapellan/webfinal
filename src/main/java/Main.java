@@ -509,8 +509,4 @@ public class Main {
         RutaService.getInstancia().update(r);
     }
 
-    public void originalUrl(String ruta) {
-
-    }
-
 }
