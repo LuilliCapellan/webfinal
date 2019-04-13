@@ -36,7 +36,7 @@
             <ul class="navbar-nav ml-auto">
                 <#if admin?? && admin == true>
                     <li class="nav-item">
-                        <a class="nav-link" href="/adminPanel">Panel de Admin</a>
+                        <a class="nav-link" href="/adminPanel/1/1">Panel de Admin</a>
                     </li>
                 </#if>
                 <#if usuario??>

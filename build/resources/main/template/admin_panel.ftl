@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="//cdn.jsdelivr.net/bootstrap.tagsinput/0.4.2/bootstrap-tagsinput.css"/>
-    <title>Acortador URL - Final Web1 - 2014-0984</title>
+    <title>Acortador URL - Final Web - 2014-0984</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -77,7 +77,7 @@
                      data-parent="#accordionExample">
                     <div class="row">
                         <!-- Usuarios -->
-                        <div class="col-md-12">
+                        <div class="col-md-12 col-md-8 col-md-3">
                             <div>
                                 <table class="table table-borderless table-responsive" style="width: 1080px">
                                     <thead>
@@ -86,7 +86,6 @@
                                         <th class="col-sm-3">Nombre</th>
                                         <th>Links</th>
                                         <th class="col-sm-2">Nivel de acceso</th>
-
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -99,7 +98,7 @@
                                                 ${user.nombre}
                                             </td>
                                             <td>
-                                                <a href="/links_usuario/${user.id}/1" class="badge badge-dark">22</a>
+                                                <a href="/links_usuario/${user.id}/1" class="badge badge-dark">Links</a>
                                             </td>
                                             <td>
                                                 <#if user.administrator >
@@ -108,6 +107,7 @@
                                                     <a class="btn btn-info" href="/userlevel/${user.id}">User</a>
                                                 </#if>
                                             </td>
+
                                         </tr>
                                     </#list>
                                 </table>
@@ -118,7 +118,7 @@
                     <ul class="pagination justify-content-center mb-4">
                         <#if actual gt 1>
                             <li class="page-item">
-                                <a class="page-link" href="/adminPanel/${actual - 1}">&larr; Atras</a>
+                                <a class="page-link" href="/adminPanel/${actual-1}/${actuall}">&larr; Atras</a>
                             </li>
 
                         <#else>
@@ -130,7 +130,7 @@
 
                         <#if paginas gt actual>
                             <li class="page-item">
-                                <a class="page-link" href="/inicio/${actual + 1}">&rarr; Siguiente</a>
+                                <a class="page-link" href="/adminPanel/${actual+1}/${actuall}">&rarr; Siguiente</a>
                             </li>
                         <#else>
 
@@ -156,7 +156,7 @@
                     <div class="row">
 
                         <!-- Blog Entries Column -->
-                        <div class="col-md-12">
+                        <div class="col-md-12 col-md-8 col-md-3">
                             <div class="table-responsive-md">
                                 <table class="table table-borderless" style="width: 1080px">
                                     <thead>
@@ -174,8 +174,9 @@
                                             <td class="col">
                                                 <a class="link-preview"
                                                    href="${ruta.ruta}"></a></td>
-                                            <td><a href="/${ruta.ruta_acortada}" class="badge badge-dark">http://lcapellan.me/${ruta.ruta_acortada}</a></td>
-                                            <td><a href="/links_usua    rio/${ruta.usuario.id}/1"
+                                            <td><a href="/${ruta.ruta_acortada}" class="badge badge-dark">http://lcapellan.me/${ruta.ruta_acortada}</a>
+                                            </td>
+                                            <td><a href="/links_usuario/${ruta.usuario.id}/1"
                                                    class="badge badge-dark">${ruta.usuario.nombre}</a></td>
                                             <td>
                                                 <a href="/stats/${ruta.id}" class="btn btn-primary">

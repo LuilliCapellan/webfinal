@@ -27,7 +27,7 @@
 
         function drawAxisTickColors() {
             const Http = new XMLHttpRequest();
-            const url = 'http://localhost:4567/rest/rutas/${link.id}/visitas';
+            const url = 'http://lcapellan.me/rest/rutas/${link.id}/visitas?token=' + sessionStorage.getItem("token");
             Http.open("GET", url);
             Http.send();
             let fecha = new Date();
@@ -121,7 +121,7 @@
             <ul class="navbar-nav ml-auto">
                 <#if admin?? && admin == true>
                     <li class="nav-item">
-                        <a class="nav-link" href="/adminPanel">Panel de Admin</a>
+                        <a class="nav-link" href="/adminPanel/1/1">Panel de Admin</a>
                     </li>
                 </#if>
                 <#if usuario??>
@@ -145,7 +145,6 @@
             <div class="col-lg-8">
                 <h2 class="mt-4">Visitas</h2>
                 <div class="lead">
-
                     <div id="myPieChart"/>
                 </div>
 
