@@ -13,6 +13,7 @@ import modelo.EntityServices.utils.Crypto;
 import modelo.EntityServices.utils.DBService;
 import modelo.EntityServices.utils.Filtros;
 import modelo.EntityServices.utils.Rest.JsonUtilidades;
+import modelo.EntityServices.utils.SOAP.Arranque;
 import modelo.EntityServices.utils.TokenService;
 import spark.ModelAndView;
 import spark.Session;
@@ -37,7 +38,7 @@ public class Main {
     public static String[] direcciones = {"favicon.ico", "", "iniciarSesion", "inicio", "borrarlink", "borrarlink2", "agregarlink",
             "guardarUsuario", "agregarUsuario", "adminPanel", "links_usuario", "stats", "inicio", "iniciarSesion"};
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 
         staticFiles.location("/template");
 
@@ -90,10 +91,10 @@ public class Main {
             }
             return new ModelAndView(attributes, "login.ftl");
         }, freeMarkerEngine);
-        post("/iniciarSesion/:usuario/:pass", (request, response) -> {
+        post("/iniciarSesion", (request, response) -> {
 
-            String user = request.params("usuario");
-            String contra = request.params("pass");
+            String user = request.queryParams("usuario");
+            String contra = request.queryParams("password");
             String recordar = request.queryParams("remember");
 
             System.out.println(recordar);
@@ -121,6 +122,7 @@ public class Main {
                 request.session().attribute("usuario", usuario1);
                 response.header("Content-Type", "application/json");
                 System.out.println("funca");
+                response.redirect("/inicio/1");
             } else {
                 response.redirect("/");
             }
@@ -473,6 +475,8 @@ public class Main {
 
             });
         });
+        Arranque.init();
+
         new Filtros().filtros();
 
     }
