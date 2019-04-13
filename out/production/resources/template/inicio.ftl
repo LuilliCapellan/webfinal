@@ -18,28 +18,9 @@
     <link href="../css/blog-home.css" rel="stylesheet">
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/@microlink/vanilla@latest/umd/microlink.min.js"></script>
 
+    <script src="../vendor/bootstrap/js/jquery.min.js"></script>
     <script>
 
-        const Http = new XMLHttpRequest();
-        const url = 'http://localhost:4567/rest/rutas/483/visitas';
-        Http.open("GET", url);
-        Http.send();
-        Http.onreadystatechange = (e) => {
-            let fechas = [];
-            let cont = 0;
-            var o = JSON.parse(Http.response);
-            console.log(o.length);
-            for (let i = 0; i < o.length; i++) {
-                let pos = '' + i + '';
-                cont++;
-                fechas = o[pos].fecha;
-                console.log(o[pos].fecha);
-                d=fechas;
-                var d = new Date(o[pos].fecha);
-
-                console.log(d);
-            }
-        }
     </script>
 </head>
 

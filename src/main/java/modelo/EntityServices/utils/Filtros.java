@@ -1,7 +1,6 @@
 package modelo.EntityServices.utils;
 
 import encapsulacion.Usuario;
-import modelo.EntityServices.EntityServices.RutaService;
 
 import static spark.Spark.before;
 
@@ -12,6 +11,14 @@ public class Filtros {
         before((request, response) -> System.out.println("Ruta antes: " + request.pathInfo()));
         before("/inicio", (request, response) -> response.redirect("/inicio/1"));
 
+
+
+        before( "/borrarUsuario/:id", (request, response) -> {
+            Usuario usuario = request.session(  true).attribute("usuario");
+            if (usuario == null || !usuario.getAdministrator()) {
+                response.redirect("/inicio/1");
+            }
+        });
         before("/adminPanel/:pag/:pagl", (request, response) -> {
             Usuario usuario = request.session(true).attribute("usuario");
             if (usuario == null || !usuario.getAdministrator()) {
@@ -20,6 +27,7 @@ public class Filtros {
         });
 
         before("/links_usuario/:id/:id", (request, response) -> {
+
             Usuario usuario = request.session(true).attribute("usuario");
             if (usuario == null || !usuario.getAdministrator()) {
                 response.redirect("/inicio/1");

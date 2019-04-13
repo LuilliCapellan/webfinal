@@ -60,9 +60,7 @@ public class UsuarioDAOImpl extends CRUD<Usuario> implements UsuarioDAO {
             usuario = (Usuario) query.getSingleResult();
         } catch (NoResultException e) {
             System.out.println("No se encontro el usuario.");
-
         }
-
         return usuario;
 
 

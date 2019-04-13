@@ -5,6 +5,7 @@ import encapsulacion.Visita;
 import eu.bitwalker.useragentutils.UserAgent;
 import freemarker.template.Configuration;
 import freemarker.template.Version;
+import io.jsonwebtoken.Claims;
 import modelo.EntityServices.EntityServices.RutaService;
 import modelo.EntityServices.EntityServices.UsuarioService;
 import modelo.EntityServices.EntityServices.VisitaService;
@@ -12,28 +13,29 @@ import modelo.EntityServices.utils.Crypto;
 import modelo.EntityServices.utils.DBService;
 import modelo.EntityServices.utils.Filtros;
 import modelo.EntityServices.utils.Rest.JsonUtilidades;
+import modelo.EntityServices.utils.TokenService;
 import spark.ModelAndView;
 import spark.Session;
 import spark.template.freemarker.FreeMarkerEngine;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static spark.Spark.*;
 
+@SuppressWarnings("Duplicates")
 public class Main {
-    public static Usuario usuario;
+    //    public static Usuario usuario;
     static final String iv = "0123456789123456"; // This has to be 16 characters
     static final String secretKeyUSer = "qwerty987654321";
     static final String secretKeyContra = "123456789klk";
 
     public final static String ACCEPT_TYPE_JSON = "application/json";
     public final static String ACCEPT_TYPE_XML = "application/xml";
-    public final static int BAD_REQUEST = 400;
-    public final static int ERROR_INTERNO = 500;
+    public static List<Claims> tokens = new ArrayList<>();
+
+    public static String[] direcciones = {"favicon.ico", "", "iniciarSesion", "inicio", "borrarlink", "borrarlink2", "agregarlink",
+            "guardarUsuario", "agregarUsuario", "adminPanel", "links_usuario", "stats", "inicio", "iniciarSesion"};
 
     public static void main(String[] args) {
 
@@ -63,10 +65,12 @@ public class Main {
 
             String[] llaveValor = new String[2];
             request.cookie("login");
+
+
             for (String key : cookies.keySet()) {
                 System.out.println("llave: " + key + " valor: " + cookies.get(key));
                 llaveValor = cookies.get(key).split(",");
-
+                System.out.println(request.cookies());
             }
 
             if (llaveValor.length > 1) {
@@ -78,25 +82,25 @@ public class Main {
 
                 Usuario usuario1 = UsuarioService.getInstancia().validateLogIn(user, contra);
                 if (usuario1 != null) {
-                    usuario = usuario1;
                     request.session(true);
-                    request.session().attribute("usuario", usuario);
-                    response.redirect("/inicio/1");
+                    request.session().attribute("usuario", usuario1);
+                    response.redirect("/inicio");
+
                 }
             }
             return new ModelAndView(attributes, "login.ftl");
         }, freeMarkerEngine);
-        post("/iniciarSesion", (request, response) -> {
+        post("/iniciarSesion/:usuario/:pass", (request, response) -> {
 
-            String user = request.queryParams("usuario");
-            String contra = request.queryParams("password");
+            String user = request.params("usuario");
+            String contra = request.params("pass");
             String recordar = request.queryParams("remember");
 
             System.out.println(recordar);
-
             System.out.println(user + " pass : " + contra);
             Usuario usuario1 = UsuarioService.getInstancia().validateLogIn(user, contra);
 
+            Map<String, Object> jsonResponse = new HashMap<>();
             if (usuario1 != null) {
                 if (recordar != null && recordar.equalsIgnoreCase("on")) {
 
@@ -108,20 +112,25 @@ public class Main {
 
                     response.cookie("/", "login", userEncrypt + "," + contraEncrypt, 604800, false); //incluyendo el path del cookie.
                 }
-                usuario = usuario1;
+                jsonResponse.put("usuario", usuario1);
+                String token = TokenService.createJWT(UUID.randomUUID().toString(),
+                        usuario1.getAdministrator() ? "admin" : "user",
+                        usuario1.getUsername(), 604800000);
+                jsonResponse.put("token", token);
                 request.session(true);
-                request.session().attribute("usuario", usuario);
-                response.redirect("/inicio");
+                request.session().attribute("usuario", usuario1);
+                response.header("Content-Type", "application/json");
+                System.out.println("funca");
             } else {
                 response.redirect("/");
             }
-            return "";
-        });
+            return jsonResponse;
+        }, JsonUtilidades.json());
         get("/inicio/:pag", (request, response) -> {
             Map<String, Object> attributes = new HashMap<>();
-            userLevel(attributes);
-
+            Usuario usuario = request.session().attribute("usuario");
             String p = request.params("pag");
+            userLevel(attributes, usuario);
             int pagina = Integer.parseInt(p);
             Ruta n;
             if (usuario == null) {
@@ -130,23 +139,25 @@ public class Main {
                 attributes.put("paginas", Math.ceil(rutaService.cantPagNulls() / 5f));
                 attributes.put("ruta", rutaService.getNulls());
             } else {
-                for (Ruta r : rutaService.getNulls()
-                ) {
-                    rutaService.delete(r);
+                for (Ruta r : rutaService.getNulls()) {
+//                    rutaService.update(r.getId(),r.getRuta(),r.getRuta_acortada(),usuario);
                     n = new Ruta(r.getRuta(), r.getRuta_acortada(), usuario);
                     rutaService.update(n);
+                    rutaService.delete(r);
                 }
                 attributes.put("list", rutaService.getPagination(pagina, usuario.getId()));
                 attributes.put("actual", pagina);
                 attributes.put("paginas", Math.ceil(rutaService.cantPag(usuario.getId()) / 5f));
                 attributes.put("ruta", rutaService.getByUser(usuario.getId()));
+                attributes.put("usuario", usuario);
             }
             return new ModelAndView(attributes, "inicio.ftl");
         }, freeMarkerEngine);
 
         get("/stats/:id", (request, response) -> {
             Map<String, Object> attributes = new HashMap<>();
-            userLevel(attributes);
+            Usuario usuario = request.session().attribute("usuario");
+            userLevel(attributes, usuario);
             String id = request.params("id");
             int rid = Integer.parseInt(id);
             attributes.put("link", rutaService.getById(rid));
@@ -159,7 +170,8 @@ public class Main {
             String p = request.params("pag");
             int pagina = Integer.parseInt(p);
             Map<String, Object> attributes = new HashMap<>();
-            userLevel(attributes);
+            Usuario usuario = request.session().attribute("usuario");
+            userLevel(attributes, usuario);
             attributes.put("actual", pagina);
             attributes.put("paginas", Math.ceil(rutaService.cantPagNulls() / 5f));
             attributes.put("list", rutaService.getPagination(pagina, userid));
@@ -170,7 +182,8 @@ public class Main {
 
         get("/adminPanel/:pag/:pagl", (request, response) -> {
             Map<String, Object> attributes = new HashMap<>();
-            userLevel(attributes);
+            Usuario usuario = request.session().attribute("usuario");
+            userLevel(attributes, usuario);
             String p = request.params("pag");
             int pagina = Integer.parseInt(p);
             String pl = request.params("pagl");
@@ -192,7 +205,8 @@ public class Main {
 
         get("/agregarUsuario", (request, response) -> {
             Map<String, Object> attributes = new HashMap<>();
-            userLevel(attributes);
+            Usuario usuario = request.session().attribute("usuario");
+            userLevel(attributes, usuario);
             return new ModelAndView(attributes, "agregarUsuario.ftl");
         }, freeMarkerEngine);
 
@@ -205,9 +219,8 @@ public class Main {
             System.out.println(username + " pass : " + pass);
             Usuario usuario1 = UsuarioService.getInstancia().validateLogIn(username, pass);
             if (usuario1 != null) {
-                usuario = usuario1;
                 request.session(true);
-                request.session().attribute("usuario", usuario);
+                request.session().attribute("usuario", usuario1);
                 response.redirect("/inicio/1");
             }
             return "";
@@ -215,6 +228,7 @@ public class Main {
 
         post("/agregarlink", (request, response) -> {
             String link = request.queryParams("link");
+            Usuario usuario = request.session().attribute("usuario");
             Ruta r = new Ruta(link, "lcapellan.me/test", usuario);
             RutaService.getInstancia().insert(r);
             shortUrl(r.getId());
@@ -227,6 +241,7 @@ public class Main {
             long rutaid = Integer.parseInt(id);
             long pagnum = Integer.parseInt(pag);
             Ruta r = rutaService.getById(rutaid);
+            System.out.println("id " + r.getId());
             rutaService.delete(r);
             if (pagnum == 1) {
                 response.redirect("/inicio/1");
@@ -248,7 +263,7 @@ public class Main {
 
 
         get("/logOut", (request, response) -> {
-            usuario = null;
+
             Session session = request.session(true);
             session.invalidate();
             response.removeCookie("/", "login");
@@ -268,9 +283,14 @@ public class Main {
         });
         get("/:corto", (request, response) -> {
             String corto = request.params("corto");
+            for (String ruta : direcciones) {
+                if (ruta.contains(corto)) {
+                    System.out.println("ignora");
+                    return "";
+                }
+            }
             Ruta r = rutaService.getById(Long.parseLong(corto, 16));
             Visita v = new Visita();
-            //DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
             Date date = new Date();
             v.setFecha(date);
             v.setIp(request.ip());
@@ -279,17 +299,14 @@ public class Main {
             UserAgent osagent = UserAgent.parseUserAgentString(request.headers("User-Agent"));
             UserAgent.parseUserAgentString(request.headers("REMOTE_ADDR")).toString();
             String[] parts = osagent.toString().split("-");
-//            os = parts[0];
+            //os = parts[0];
             browser = parts[1];
             v.setNavegador(browser);
             v.setRuta(r);
             visitaService.insert(v);
             response.redirect(r.getRuta());
-
-//            response.redirect(corto);
             return "";
         });
-
 
         //Rest
         //rutas servicios RESTFUL
@@ -301,7 +318,6 @@ public class Main {
                 } else {
                     response.header("Content-Type", ACCEPT_TYPE_JSON);
                 }
-
             });
 
             get("/", (request, response) -> {
@@ -326,9 +342,9 @@ public class Main {
                     return usuario;
                 }, JsonUtilidades.json());
 
+
                 //crea un usuario
                 post("/", Main.ACCEPT_TYPE_JSON, (request, response) -> {
-
                     Usuario usuario = null;
                     usuario = new Gson().fromJson(request.body(), Usuario.class);
                     usuarioService.insert(usuario);
@@ -376,7 +392,7 @@ public class Main {
                     Ruta ruta = rutaService.getById(Integer.parseInt(request.params("id")));
                     long rutaid = ruta.getId();
                     System.out.println(ruta.getId());
-                    return  visitaService.getByRuta(rutaid);
+                    return visitaService.getByRuta(rutaid);
 
                 }, JsonUtilidades.json());
                 //crea una ruta
@@ -437,7 +453,7 @@ public class Main {
                 }, JsonUtilidades.json());
 
                 //
-                post("/",  Main.ACCEPT_TYPE_XML, (request, response) -> {
+                post("/", Main.ACCEPT_TYPE_XML, (request, response) -> {
                     return true;
                 }, JsonUtilidades.json());
 
@@ -474,7 +490,7 @@ public class Main {
         return remoteAddr;
     }
 
-    private static void userLevel(Map<String, Object> attributes) {
+    private static void userLevel(Map<String, Object> attributes, Usuario usuario) {
         attributes.put("usuario", usuario);
         if (usuario != null) {
             attributes.put("admin", usuario.getAdministrator());
