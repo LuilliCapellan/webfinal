@@ -286,7 +286,7 @@ public class Main {
         get("/:corto", (request, response) -> {
             String corto = request.params("corto");
             for (String ruta : direcciones) {
-                if (ruta.contains(corto)) {
+                if (ruta.contains(corto) && ruta.length() > 4) {
                     System.out.println("ignora");
                     return "";
                 }
