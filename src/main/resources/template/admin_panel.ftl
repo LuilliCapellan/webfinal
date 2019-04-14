@@ -86,6 +86,7 @@
                                         <th class="col-sm-3">Nombre</th>
                                         <th>Links</th>
                                         <th class="col-sm-2">Nivel de acceso</th>
+                                        <th class="col-sm-2">Accion</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -107,7 +108,13 @@
                                                     <a class="btn btn-info" href="/userlevel/${user.id}">User</a>
                                                 </#if>
                                             </td>
-
+                                            <td>
+                                                <#if user.nombre != "admin" >
+                                                    <a class="btn btn-danger" href="/borrarusuario/${user.id}">Borrar</a>
+                                                <#else>
+                                                    <a class="btn" href="#"> X </a>
+                                                </#if>
+                                            </td>
                                         </tr>
                                     </#list>
                                 </table>

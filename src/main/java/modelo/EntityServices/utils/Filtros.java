@@ -27,7 +27,12 @@ public class Filtros {
         });
 
         before("/links_usuario/:id/:id", (request, response) -> {
-
+            Usuario usuario = request.session(true).attribute("usuario");
+            if (usuario == null || !usuario.getAdministrator()) {
+                response.redirect("/inicio/1");
+            }
+        });
+        before("/borrarusuario/:id", (request, response) -> {
             Usuario usuario = request.session(true).attribute("usuario");
             if (usuario == null || !usuario.getAdministrator()) {
                 response.redirect("/inicio/1");

@@ -272,6 +272,14 @@ public class Main {
             response.redirect("/links_usuario/" + userid + "/1");
             return "";
         });
+        get("/borrarusuario/:id", (request, response) -> {
+            String id = request.params("id");
+            long userid = Integer.parseInt(id);
+            Usuario u = usuarioService.getById(userid);
+            usuarioService.delete(u);
+            response.redirect("/adminPanel/1/1");
+            return "";
+        });
 
 
         get("/logOut", (request, response) -> {
