@@ -15,6 +15,7 @@ import modelo.EntityServices.utils.Filtros;
 import modelo.EntityServices.utils.Rest.JsonUtilidades;
 import modelo.EntityServices.utils.SOAP.Arranque;
 import modelo.EntityServices.utils.TokenService;
+import org.h2.tools.DeleteDbFiles;
 import spark.ModelAndView;
 import spark.Session;
 import spark.template.freemarker.FreeMarkerEngine;
@@ -306,7 +307,11 @@ public class Main {
             v.setNavegador(browser);
             v.setRuta(r);
             visitaService.insert(v);
-            response.redirect(r.getRuta());
+            if (r.getRuta().contains("https://")) {
+                response.redirect(r.getRuta());
+            } else {
+                response.redirect("https://" + r.getRuta());
+            }
             return "";
         });
 
@@ -367,7 +372,8 @@ public class Main {
 
                 //eliminar un usuario
                 delete("/:id", (request, response) -> {
-                    Usuario usuario = new Gson().fromJson(request.body(), Usuario.class);
+                    String id = request.params("id");
+                    Usuario usuario = usuarioService.getById(Long.parseLong(id));
                     usuarioService.delete(usuario);
                     return true;
                 }, JsonUtilidades.json());
@@ -421,7 +427,7 @@ public class Main {
 
                 //eliminar una ruta
                 delete("/:id", (request, response) -> {
-                    Ruta ruta = new Gson().fromJson(request.body(), Ruta.class);
+                    Ruta ruta = rutaService.getById(Long.parseLong(request.params("id")));
                     rutaService.delete(ruta);
                     return true;
                 }, JsonUtilidades.json());
@@ -505,7 +511,12 @@ public class Main {
     public static void shortUrl(long ruta_id) {
         Ruta old = RutaService.getInstancia().getById(ruta_id);
         String ruta_acortada = Long.toHexString(ruta_id);
-        Ruta r = new Ruta(old.getId(), old.getRuta(), ruta_acortada, old.getUsuario());
+        Ruta r;
+        if (old.getRuta().contains("https://")) {
+             r = new Ruta(old.getId(), old.getRuta(), ruta_acortada, old.getUsuario());
+        } else {
+             r = new Ruta(old.getId(), "https://" + old.getRuta(), ruta_acortada, old.getUsuario());
+        }
         RutaService.getInstancia().update(r);
     }
 

@@ -27,7 +27,7 @@
 
         function drawAxisTickColors() {
             const Http = new XMLHttpRequest();
-            const url = 'http://lcapellan.me/rest/rutas/${link.id}/visitas?token=' + sessionStorage.getItem("token");
+            const url = 'https://lcapellan.me/rest/rutas/${link.id}/visitas';
             Http.open("GET", url);
             Http.send();
             let fecha = new Date();
@@ -157,7 +157,9 @@
     </div>
     <!-- Sidebar Widgets Column -->
     <div class="col-md-8">
-        <div id="barchart_values"></div>
+        <div id="barchart_values">
+
+        </div>
 
     </div>
     <div class="col-md-4">

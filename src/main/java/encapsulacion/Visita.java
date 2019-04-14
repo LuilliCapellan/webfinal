@@ -11,6 +11,7 @@ import java.util.Date;
 public class Visita {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private long id;
     @Column
     private String navegador;
@@ -18,7 +19,7 @@ public class Visita {
     private String ip;
     @Column
     private Date fecha;
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.EAGER)
     private Ruta ruta;
 
     public Visita(){

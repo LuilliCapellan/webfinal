@@ -2,6 +2,8 @@ package dao.Implementations;
 
 import dao.interfaces.RutaDAO;
 import encapsulacion.Ruta;
+import encapsulacion.Visita;
+import modelo.EntityServices.EntityServices.VisitaService;
 import modelo.EntityServices.utils.CRUD;
 
 import javax.persistence.EntityManager;
@@ -26,6 +28,11 @@ public class RutaDAOImpl extends CRUD<Ruta> implements RutaDAO {
 
     @Override
     public void delete(Ruta e) {
+        List<Visita> v = VisitaService.getInstancia().getByRuta(e.getId());
+        for (Visita vd:v
+             ) {
+            VisitaService.getInstancia().delete(vd);
+        }
         eliminar(e.getId());
     }
 
@@ -61,7 +68,7 @@ public class RutaDAOImpl extends CRUD<Ruta> implements RutaDAO {
     public Ruta getByRutaAcortada(String rutaAcortada) {
         EntityManager em = getEntityManager();
         Query query = em.createNamedQuery("Ruta.findURLbyRutaAcortada");
-        query.setParameter("ruta_acortada", rutaAcortada);
+        query.setParameter("rutaacortada", rutaAcortada);
         return (Ruta) query.getSingleResult();
     }
 

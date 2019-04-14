@@ -1,7 +1,9 @@
 package dao.Implementations;
 
 import dao.interfaces.UsuarioDAO;
+import encapsulacion.Ruta;
 import encapsulacion.Usuario;
+import modelo.EntityServices.EntityServices.RutaService;
 import modelo.EntityServices.utils.CRUD;
 
 import javax.persistence.EntityManager;
@@ -29,7 +31,11 @@ public class UsuarioDAOImpl extends CRUD<Usuario> implements UsuarioDAO {
 
     @Override
     public void delete(Usuario e) {
-        eliminar(e);
+        List<Ruta> r = RutaService.getInstancia().getByUser(e.getId());
+        for (Ruta rd : r) {
+            RutaService.getInstancia().delete(rd);
+        }
+        eliminar(e.getId());
     }
 
     @Override
