@@ -124,6 +124,13 @@ public class Main {
                 response.header("Content-Type", "application/json");
                 System.out.println("funca");
                 response.redirect("/inicio/1");
+                for (Ruta r : rutaService.getNulls()) {
+//                    rutaService.update(r.getId(),r.getRuta(),r.getRuta_acortada(),usuario);
+//                    n = new Ruta(r.getRuta(), r.getRuta_acortada(), usuario);
+                    r.setUsuario(usuario1);
+                    rutaService.update(r);
+//                    rutaService.delete(r);
+                }
             } else {
                 response.redirect("/");
             }
@@ -142,12 +149,7 @@ public class Main {
                 attributes.put("paginas", Math.ceil(rutaService.cantPagNulls() / 5f));
                 attributes.put("ruta", rutaService.getNulls());
             } else {
-                for (Ruta r : rutaService.getNulls()) {
-//                    rutaService.update(r.getId(),r.getRuta(),r.getRuta_acortada(),usuario);
-                    n = new Ruta(r.getRuta(), r.getRuta_acortada(), usuario);
-                    rutaService.update(n);
-                    rutaService.delete(r);
-                }
+
                 attributes.put("list", rutaService.getPagination(pagina, usuario.getId()));
                 attributes.put("actual", pagina);
                 attributes.put("paginas", Math.ceil(rutaService.cantPag(usuario.getId()) / 5f));
@@ -210,6 +212,13 @@ public class Main {
             Map<String, Object> attributes = new HashMap<>();
             Usuario usuario = request.session().attribute("usuario");
             userLevel(attributes, usuario);
+            for (Ruta r : rutaService.getNulls()) {
+//                    rutaService.update(r.getId(),r.getRuta(),r.getRuta_acortada(),usuario);
+//                    n = new Ruta(r.getRuta(), r.getRuta_acortada(), usuario);
+                r.setUsuario(usuario);
+                rutaService.update(r);
+//                    rutaService.delete(r);
+            }
             return new ModelAndView(attributes, "agregarUsuario.ftl");
         }, freeMarkerEngine);
 
