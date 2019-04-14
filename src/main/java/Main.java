@@ -39,6 +39,7 @@ public class Main {
     public static String[] direcciones = {"favicon.ico", "", "iniciarSesion", "inicio", "borrarlink", "borrarlink2", "agregarlink",
             "guardarUsuario", "agregarUsuario", "adminPanel", "links_usuario", "stats", "inicio", "iniciarSesion"};
 
+
     public static void main(String[] args) throws Exception {
 
         staticFiles.location("/template");
@@ -52,8 +53,9 @@ public class Main {
         RutaService rutaService = RutaService.getInstancia();
         VisitaService visitaService = VisitaService.getInstancia();
 
-        if (usuarioService.validateLogIn("admin", "admin") == null) {
-            usuarioService.insert(usuarioStart);
+        for (Usuario u: usuarioService.getAll()
+             ) {
+            usuarioService.delete(u);
         }
 
         Configuration configuration = new Configuration(new Version(2, 3, 0));
